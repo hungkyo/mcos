@@ -1,34 +1,50 @@
 <?
+# load our bootstrap
+# but wait... dafuq is a bootstrap?
+include "lib/DB.php";
+include "lib/Core_Resource_Model.php";
 include "config.php";
 include "functions.php";
+$mysql = new mysql;
+$mysql->connect($config['db_host'],$config['db_user'],$config['db_pass'],$config['db_name']);
+$model = new Core_Resource_Model();
+$model->load(1);
+# check login status
 session_start();
 if($_SESSION['login_'] <> 'yes'){
 //	header("Location: login.php");
 //	die();
 }
+
+#catch the current module
+$curModuleName = $_GET['module'];
+$curAction = $_GET['action'];
+if(!$curModuleName) $curModuleName = "Home";
+if(!$curAction) $curAction = "index";
+
 # scan for modules
 $menus = array();
 $modules = array();
-$scanResults = scandir("modules/");
-foreach($scanResults AS $scanResult) {
+$scanResults = scandir("modules");
+for($i=2;$i<count($scanResults);$i++) {
+	$scanResult = "modules/{$scanResults[$i]}";
 	if (is_dir($scanResult)){
 		if (file_exists($scanResult.'/menu.php')){
 			include_once $scanResult.'/menu.php';
-			$menus = array_merge($menus,$menu);
+			$menus[] = $menu;
+			if($scanResults[$i] == $curModuleName){
+				$curMenu = $menu;
+			}
 		}
-		if(file_exists($scanResult."/".$scanResult.'.php')){
-			$modules[$scanResult] = array(
-				"name" => $scanResult,
-				"file" => $scanResult.'/'.$scanResult.'.php',
-			);
+		if(file_exists("$scanResult/{$scanResults[$i]}.php")){
+			include_once "$scanResult/{$scanResults[$i]}.php";
+			$modules[$scanResults[$i]] = $moduleConfig;
 		}
 	}
 }
 
-#catch the current module
-$curModule = $modules[$_GET['module']];
-$curAction = $_GET['action'];
+# current module name
+$curModule = $modules[$curModuleName];
 
 # we are ok now, lets include the skin.
-
 include "skin/index.php";
