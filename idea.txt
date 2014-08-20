@@ -1,0 +1,19 @@
+mô hình xử lý trung tâm
+1. đưa vào trung tâm list domain
+2. install từng domain trên các server.
+	2 cách:
+		1. lưu 1 db sẵn, chỉ việc kết nối vào và tạo db từ db gốc, chạy sql update các options
+		2. chạy cài trên client
+	assign server cho từng domain & lưu lại
+3. quản lý bài viết
+	1. lưu toàn bộ bài viết trên máy trung tâm
+	2. assign các bài viết cho các domain
+	3. chạy script liên tục để hẹn giờ post bài cho từng domain
+4. quản lý traffic
+	1. thông qua JS để track traffic
+	2. chặn các bot không cần thiết để giảm thiểu request lên server
+5. sitemap
+	1. script tạo sitemap định kì ( 15p/lần )
+	2. ping sitemap: 
+		chạy script ở trung tâm để request ping cho từng domain
+		hoặc ping luôn lúc sitemap có thay đổi
