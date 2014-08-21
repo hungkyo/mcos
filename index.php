@@ -7,8 +7,7 @@ include "config.php";
 include "functions.php";
 $mysql = new mysql;
 $mysql->connect($config['db_host'],$config['db_user'],$config['db_pass'],$config['db_name']);
-$model = new Core_Resource_Model();
-$model->load(1);
+
 # check login status
 session_start();
 if($_SESSION['login_'] <> 'yes'){
@@ -42,6 +41,16 @@ for($i=2;$i<count($scanResults);$i++) {
 		}
 	}
 }
+
+foreach($modules AS $module){
+	foreach($module['model'] AS $model){
+		require_once $model['file'];
+	}
+}
+
+$server = getModel('server');
+$server->load(1);
+var_dump($server);
 
 # current module name
 $curModule = $modules[$curModuleName];

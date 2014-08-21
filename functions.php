@@ -664,4 +664,10 @@ function _link($z){
 		}
 		return $tax;
 	}
-?>
+function getModel($name){
+	$className = "{$name}Model";
+	return new $className;
+}
+function getSingleton($name){
+
+}
