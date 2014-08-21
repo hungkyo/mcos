@@ -1,4 +1,5 @@
 <?
+#
 # load our bootstrap
 # but wait... dafuq is a bootstrap?
 include "lib/DB.php";
