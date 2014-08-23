@@ -665,8 +665,10 @@ function _link($z){
 		return $tax;
 	}
 function getModel($name){
+	$className = $name;
+	if(class_exists($className)) return new $className;
 	$className = "{$name}Model";
-	return new $className;
+	if(class_exists($className)) return new $className;
 }
 function getSingleton($name){
 

@@ -29,6 +29,8 @@
 	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 	<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 	<![endif]-->
+	<!-- jQuery 2.0.2 -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 </head>
 <body class="skin-blue">
 <!-- header logo: style can be found in header.less -->
@@ -124,6 +126,35 @@
 	<aside class="right-side">
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
+			<?php
+			$sessionMessages = getModel("Core_Session_Message");
+			if ($errors = $sessionMessages->getError()) {
+				?>
+				<div class="warning">
+					<?php
+					foreach ($errors AS $error) {
+						?>
+						<p><?php echo $error ?> </p>
+					<?php
+					}
+					?>
+				</div>
+			<?php
+			}
+			if ($successes = $sessionMessages->getSuccess()) {
+				?>
+				<div class="success">
+					<?php
+					foreach ($successes AS $success) {
+						?>
+						<p><?php echo $success ?> </p>
+					<?php
+					}
+					?>
+				</div>
+			<?php
+			}
+			?>
 			<h1>
 				<?= $curModuleName ?>
 				<small><?= ucwords($curAction) ?></small>
@@ -166,8 +197,7 @@
 <!-- add new calendar event modal -->
 
 
-<!-- jQuery 2.0.2 -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+
 <!-- jQuery UI 1.10.3 -->
 <script src="skin/js/jquery-ui-1.10.3.min.js" type="text/javascript"></script>
 <!-- Bootstrap -->

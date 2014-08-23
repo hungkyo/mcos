@@ -7,7 +7,16 @@ if ($_GET['id']) {
 }
 if ($_POST['submit']) {
 	// ajax!
-
+	$sessionMessage = getModel("Core_Session_Message");
+	if(!is_object($curServer)) $curServer = getModel("server");
+	foreach($_POST AS $k=>$v){
+		if($k <> 'submit'){
+			$curServer->setData($k,$v);
+		}
+	}
+	$curServer->save();
+	$sessionMessage->addSuccess("All change(s) were saved!");
+	exit;
 }
 ?>
 <div class="col-md-6">
@@ -18,7 +27,7 @@ if ($_POST['submit']) {
 		</div>
 		<!-- /.box-header -->
 		<!-- form start -->
-		<form role="form">
+		<form role="form" action="?module=<?php echo $_GET['module']?>&action=<?php echo $_GET['action']?><?php echo $_GET['id']?"&id={$_GET['id']}":''?>">
 			<div class="box-body">
 				<div class="form-group">
 					<label for="ip">Server IP</label>
@@ -42,7 +51,7 @@ if ($_POST['submit']) {
 				</div>
 				<div class="form-group">
 					<label for="active">Active</label>
-					&nbsp;&nbsp;&nbsp;<input type="checkbox" id="active" value="1" value="<?php echo is_object($curServer)?($curServer->getData('active')<>0?'checked':''):''?>"/>
+					&nbsp;&nbsp;&nbsp;<input type="checkbox" id="active" value="1" <?php echo is_object($curServer)?($curServer->getData('active')<>0?'checked':''):''?> />
 				</div>
 			</div>
 			<!-- /.box-body -->
@@ -54,3 +63,25 @@ if ($_POST['submit']) {
 	</div>
 	<!-- /.box -->
 </div>
+<script>
+	$("form").submit(function(){
+		var actionLink = $(this).attr("action");
+		var data = {};
+		$("form input").each(function(){
+			if($(this).attr('id') != undefined){
+				data[$(this).attr('id')] = $(this).val();
+			}
+		});
+		data.submit = true;
+		$.ajax({
+			url: actionLink,
+			data: data,
+			async: false,
+			type: 'POST',
+			success: function(){
+				window.location.reload();
+			}
+		});
+		return false;
+	});
+</script>

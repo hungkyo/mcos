@@ -138,7 +138,7 @@ Abstract Class Core_Resource_Model
 			}
 			$set = implode(',',$set);
 			$this->mysql->query("UPDATE {$this->_table}entity
-				SET $set
+				SET {$set}
 			WHERE entity_id = {$this->getData('entity_id')}");
 			return $this;
 		}else{

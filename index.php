@@ -1,16 +1,19 @@
 <?php
+session_start();
 #
 # load our bootstrap
 # but wait... dafuq is a bootstrap?
-include "lib/DB.php";
-include "lib/Core_Resource_Model.php";
+$scanResults = scandir("lib");
+for($i=2;$i<count($scanResults);$i++) {
+	$scanResult = "lib/{$scanResults[$i]}";
+	include_once $scanResult;
+}
 include "config.php";
 include "functions.php";
 $mysql = new mysql;
 $mysql->connect($config['db_host'],$config['db_user'],$config['db_pass'],$config['db_name']);
 
 # check login status
-session_start();
 if($_SESSION['login_'] <> 'yes'){
 //	header("Location: login.php");
 //	die();
