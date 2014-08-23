@@ -49,14 +49,6 @@ foreach($modules AS $module){
 	}
 }
 
-$server = getModel('server');
-$server->load('test save','name')->delete();
-// $server->save();
-// foreach ($servers AS $ser){
-	// var_dump($ser->getData('c'));
-// }
-var_dump($server);
-
 # current module name
 $curModule = $modules[$curModuleName];
 
