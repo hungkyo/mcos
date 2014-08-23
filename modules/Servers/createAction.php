@@ -16,6 +16,7 @@ if ($_POST['submit']) {
 	}
 	$curServer->save();
 	$sessionMessage->addSuccess("All change(s) were saved!");
+	$sessionMessage->addRedirect("index.php?module=" . $_GET['module']);
 	exit;
 }
 ?>

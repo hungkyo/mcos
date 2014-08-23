@@ -38,4 +38,16 @@ class Core_Session_Message
 		$_SESSION['_success'] = array();
 		return $this->_success;
 	}
+
+	public function addRedirect($url)
+	{
+		$_SESSION['_redirect'] = $url;
+		return $this;
+	}
+	public function getRedirect(){
+		$url = $_SESSION['_redirect'];
+		$_SESSION['_redirect'] = '';
+		if($url) return $url;
+		return false;
+	}
 }

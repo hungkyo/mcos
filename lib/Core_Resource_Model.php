@@ -1,4 +1,5 @@
 <?php
+
 Abstract Class Core_Resource_Model
 {
 	private $_data = array();
@@ -9,8 +10,7 @@ Abstract Class Core_Resource_Model
 	private $curPage = 1;
 	private $pageSize = 10;
 	private $_collection = array();
-	private $_orderBy = 'entity_id';
-	private $_order = 'DESC';
+	private $_order = array();
 
 	public function __construct()
 	{
@@ -43,121 +43,139 @@ Abstract Class Core_Resource_Model
 		$this->_selectedAttribute[] = $attribute;
 		return $this;
 	}
-	public function addOrder($key,$ord='DESC')
+
+	public function addOrder($key, $ord = 'DESC')
 	{
-		$this->_orderBy = $key;
-		$this->_order = $ord;
+		$this->_order[] = array(
+			$key => $ord
+		);
 		return $this;
 	}
+
 	public function getAll()
 	{
 		$this->pageSize = -1;
 		return $this;
 	}
+
 	public function getCount()
 	{
 		$this->addSelect("COUNT(*) AS c");
 		return $this;
 	}
+
 	public function load($val = '', $key = 'entity_id')
 	{
 		$startResult = ($this->curPage - 1) * $this->pageSize;
 		$limit = "LIMIT {$startResult},{$this->pageSize}";
 		$select = array();
-		foreach($this->_selectedAttribute AS $sel){
+		foreach ($this->_selectedAttribute AS $sel) {
 			$select[] = $sel;
 		}
-		if(count($select)){
+		if (count($select)) {
 			$select = implode($select, ',');
-		}else $select = '*';
-		if($this->pageSize == -1) $limit = '';
+		} else $select = '*';
+		if ($this->pageSize == -1) $limit = '';
 		$where = array();
-		if(count($this->_filterAttribute) >= 1){
+		if (count($this->_filterAttribute) >= 1) {
 			foreach ($this->_filterAttribute AS $filter) {
 				// or => array('key' => 'val','key2' => 'val2')
 				// and => array('key' => 'val','key2' => 'val2')
-				foreach($filter AS $cond => $fil){
+				foreach ($filter AS $cond => $fil) {
 					$whereTemp = array();
-					if(is_array($fil)){
-						foreach($fil AS $keyFil=>$valFil){
-							if(is_array($valFil)){
-								foreach ($valFil AS $key=>$val){
-									$whereTemp[] = "{$key}=".var_export($val,true);
+					if (is_array($fil)) {
+						foreach ($fil AS $keyFil => $valFil) {
+							if (is_array($valFil)) {
+								foreach ($valFil AS $key => $val) {
+									$whereTemp[] = "{$key}=" . var_export($val, true);
 								}
-							}
-							else $whereTemp[] = "{$keyFil}=".var_export($valFil,true);
+							} else $whereTemp[] = "{$keyFil}=" . var_export($valFil, true);
 						}
-						$whereTemp = '('.implode(" $cond ", $whereTemp).')';
-					}else{
-						$whereTemp = "{$cond}=".var_export($fil,true);
+						$whereTemp = '(' . implode(" $cond ", $whereTemp) . ')';
+					} else {
+						$whereTemp = "{$cond}=" . var_export($fil, true);
 					}
 				}
 				$where[] = $whereTemp;
 			}
-		}elseif($val){
-			$where[] = "$key = ".var_export($val,true);
-		}else{
+		} elseif ($val) {
+			$where[] = "$key = " . var_export($val, true);
+		} else {
 			$where[] = "1=1";
 		}
-		$where = implode(" AND ",$where);
-		$order = "";
-		if ($this->_orderBy){
-			$order = "ORDER BY {$this->_orderBy} {$this->_order}";
+		$where = implode(" AND ", $where);
+		$order = array();
+		if (count($this->_order)) {
+			foreach ($this->_order AS $ord) {
+				foreach ($ord AS $by => $or) {
+					$order[] = "{$by} {$or}";
+				}
+			}
+			$order = "ORDER BY " . implode(', ', $order);
+		} else {
+			$order = "ORDER BY entity_id DESC";
 		}
+
 		$q = $this->mysql->query("SELECT {$select} FROM
 		{$this->_table}entity AS e
 		WHERE {$where}
 		{$order}
 		{$limit}");
-		if(!$val){
+		if (!$val) {
 			// this one is for the collection
-			while($r = mysql_fetch_array($q,MYSQL_ASSOC)){
+			while ($r = mysql_fetch_array($q, MYSQL_ASSOC)) {
 				$tempObj = get_class($this);
 				$tempObj = new $tempObj;
-				foreach ($r AS $k=>$v) $tempObj->setData($k,$v);
-				$this->_collection[] = $tempObj;				
+				foreach ($r AS $k => $v) $tempObj->setData($k, $v);
+				$this->_collection[] = $tempObj;
 			}
 			return $this->_collection;
-		}else{
+		} else {
 			// return the object
-			$r=mysql_fetch_array($q,MYSQL_ASSOC);
-			foreach ($r AS $k=>$v) $this->setData($k,$v);
+			$r = mysql_fetch_array($q, MYSQL_ASSOC);
+			foreach ($r AS $k => $v) $this->setData($k, $v);
 			return $this;
 		}
 	}
 
 	public function save()
 	{
-		if($this->getData('entity_id')){
+		if ($this->getData('entity_id')) {
 			// Update the data
 			$set = array();
-			foreach ($this->_data AS $key => $val){
-				if($key <> 'entity_id'){
-					$set[] = "{$key}=".var_export($val,true);
+			foreach ($this->_data AS $key => $val) {
+				if ($key <> 'entity_id') {
+					$set[] = "{$key}=" . var_export($val, true);
 				}
 			}
-			$set = implode(',',$set);
+			$set = implode(',', $set);
 			$this->mysql->query("UPDATE {$this->_table}entity
 				SET {$set}
 			WHERE entity_id = {$this->getData('entity_id')}");
 			return $this;
-		}else{
+		} else {
 			// Insert the data
 			$keys = array();
 			$vals = array();
-			foreach($this->_data AS $key=> $val){
+			foreach ($this->_data AS $key => $val) {
 				$keys[] = $key;
-				$vals[] = var_export($val,true);
+				$vals[] = var_export($val, true);
 			}
-			$keys = implode($keys,',');
-			$vals = implode($vals,',');
+			$keys = implode($keys, ',');
+			$vals = implode($vals, ',');
 			$this->mysql->query("INSERT INTO {$this->_table}entity ({$keys}) VALUES({$vals})");
-			$this->setData('entity_id',mysql_insert_id());
+			$this->setData('entity_id', mysql_insert_id());
 			return $this;
 		}
 	}
-	
-	public function delete(){
+
+	public function getId()
+	{
+		return $this->getData('entity_id');
+	}
+
+	public function delete()
+	{
 		if (!$this->getData('entity_id')) return;
 		$this->mysql->query("DELETE FROM {$this->_table}entity WHERE entity_id = {$this->getData('entity_id')}");
 	}
