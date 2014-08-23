@@ -31,8 +31,8 @@ if (count($domains)) {
 					<td><?php echo $domain->getId() ?></td>
 					<td><?php echo $domain->getData('name') ?></td>
 					<td><?php echo getModel("server")->load($domain->getData('server'))->getData('ip') ?></td>
-					<td><?php echo $domain->getData('installed') > 1 ? 'Installed' : 'Not Installed' ?></td>
-					<td><?php echo $domain->getData('active') > 1 ? 'Installed' : 'Not Installed' ?></td>
+					<td><?php echo $domain->getData('installed') > 0 ? 'Installed' : 'Not Installed' ?></td>
+					<td><?php echo $domain->getData('active') > 0 ? 'Activated' : 'Not Activated' ?></td>
 					<td><?php echo $domain->getData('posts')?></td>
 					<td>&nbsp;</td>
 					<td>

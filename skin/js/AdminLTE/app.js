@@ -1066,6 +1066,11 @@ $("form").submit(function () {
             data[$(this).attr('id')] = $(this).val();
         }
     });
+    $("form input[type='checkbox']").each(function () {
+        if ($(this).attr('id') != undefined) {
+            data[$(this).attr('id')] = $(this).prop('checked') ? 1 : 0;
+        }
+    });
     $("form textarea").each(function () {
         if ($(this).attr('id') != undefined) {
             data[$(this).attr('id')] = $(this).val();
