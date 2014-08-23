@@ -72,35 +72,3 @@ if ($_POST['submit']) {
 	</div>
 	<!-- /.box -->
 </div>
-<script>
-	$("form").submit(function () {
-		var actionLink = $(this).attr("action");
-		var data = {};
-		$("form input").each(function () {
-			if ($(this).attr('id') != undefined) {
-				data[$(this).attr('id')] = $(this).val();
-			}
-		});
-		$("form select").each(function () {
-			if ($(this).attr('id') != undefined) {
-				data[$(this).attr('id')] = $(this).val();
-			}
-		});
-		$("form textarea").each(function () {
-			if ($(this).attr('id') != undefined) {
-				data[$(this).attr('id')] = $(this).val();
-			}
-		});
-		data.submit = true;
-		$.ajax({
-			url: actionLink,
-			data: data,
-			async: false,
-			type: 'POST',
-			success: function () {
-				window.location.reload();
-			}
-		});
-		return false;
-	});
-</script>

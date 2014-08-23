@@ -32,14 +32,17 @@ if(!$curAction) $curAction = "index";
 
 # scan for modules
 $menus = array();
+$menusTemp = array();
 $modules = array();
 $scanResults = scandir("modules");
+$j = 0;
 for($i=2;$i<count($scanResults);$i++) {
 	$scanResult = "modules/{$scanResults[$i]}";
 	if (is_dir($scanResult)){
 		if (file_exists($scanResult.'/menu.php')){
 			include_once $scanResult.'/menu.php';
-			$menus[] = $menu;
+			$menusTemp[$j] = $menu;
+			$menusOrder[$j] = $menu['order'];
 			if($scanResults[$i] == $curModuleName){
 				$curMenu = $menu;
 			}
@@ -48,7 +51,12 @@ for($i=2;$i<count($scanResults);$i++) {
 			include_once "{$scanResult}/{$scanResults[$i]}.php";
 			$modules[$scanResults[$i]] = $moduleConfig;
 		}
+		$j++;
 	}
+}
+asort($menusOrder);
+foreach($menusOrder AS $j => $menuOrder){
+	$menus[] = $menusTemp[$j];
 }
 
 foreach($modules AS $module){
