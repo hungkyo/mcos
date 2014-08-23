@@ -7,7 +7,7 @@
 		),
 		"model" => array(
 			"server" => array(
-				"type" => "eav", // yeah, eav!
+				"type" => "flat", // hmmm, flat is enough
 				"tablePrefix" => "server_",
 				"file" => dirname(__FILE__)."/".'serverModel.php',
 			),

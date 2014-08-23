@@ -94,8 +94,10 @@ Abstract Class Core_Resource_Model
 				}
 				$where[] = $whereTemp;
 			}
-		}else{
+		}elseif($val){
 			$where[] = "$key = ".var_export($val,true);
+		}else{
+			$where[] = "1=1";
 		}
 		$where = implode(" AND ",$where);
 		$order = "";

@@ -1,4 +1,4 @@
-<?
+<?php
 #
 # load our bootstrap
 # but wait... dafuq is a bootstrap?
@@ -37,7 +37,7 @@ for($i=2;$i<count($scanResults);$i++) {
 			}
 		}
 		if(file_exists("$scanResult/{$scanResults[$i]}.php")){
-			include_once "$scanResult/{$scanResults[$i]}.php";
+			include_once "{$scanResult}/{$scanResults[$i]}.php";
 			$modules[$scanResults[$i]] = $moduleConfig;
 		}
 	}

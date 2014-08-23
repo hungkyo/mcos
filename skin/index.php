@@ -33,123 +33,133 @@
 <body class="skin-blue">
 <!-- header logo: style can be found in header.less -->
 <header class="header">
-<a href="index.php" class="logo">
-	<!-- Add the class icon to your logo image or logo icon to add the margining -->
-	MCOS Admin
-</a>
-<!-- Header Navbar: style can be found in header.less -->
-<nav class="navbar navbar-static-top" role="navigation">
-<!-- Sidebar toggle button-->
-<a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
-	<span class="sr-only">Toggle navigation</span>
-	<span class="icon-bar"></span>
-	<span class="icon-bar"></span>
-	<span class="icon-bar"></span>
-</a>
+	<a href="index.php" class="logo">
+		<!-- Add the class icon to your logo image or logo icon to add the margining -->
+		MCOS Admin
+	</a>
+	<!-- Header Navbar: style can be found in header.less -->
+	<nav class="navbar navbar-static-top" role="navigation">
+		<!-- Sidebar toggle button-->
+		<a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</a>
 
-<div class="navbar-right">
-<ul class="nav navbar-nav">
-<!-- Notifications: style can be found in dropdown.less -->
-<li class="user user-menu">
-	<a href="logout.php" class="btn btn-flat">Sign out</a>
-</li>
-</ul>
-</div>
-</nav>
+		<div class="navbar-right">
+			<ul class="nav navbar-nav">
+				<!-- Notifications: style can be found in dropdown.less -->
+				<li class="user user-menu">
+					<a href="logout.php" class="btn btn-flat">Sign out</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
 </header>
 <div class="wrapper row-offcanvas row-offcanvas-left">
-<!-- Left side column. contains the logo and sidebar -->
-<aside class="left-side sidebar-offcanvas">
-	<!-- sidebar: style can be found in sidebar.less -->
-	<section class="sidebar">
-		<!-- Sidebar user panel -->
+	<!-- Left side column. contains the logo and sidebar -->
+	<aside class="left-side sidebar-offcanvas">
+		<!-- sidebar: style can be found in sidebar.less -->
+		<section class="sidebar">
+			<!-- Sidebar user panel -->
 
-		<!-- search form -->
-		<form action="#" method="get" class="sidebar-form">
-			<div class="input-group">
-				<input type="text" name="q" class="form-control" placeholder="Search..."/>
+			<!-- search form -->
+			<form action="#" method="get" class="sidebar-form">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control" placeholder="Search..."/>
                             <span class="input-group-btn">
                                 <button type='submit' name='seach' id='search-btn' class="btn btn-flat"><i
-										class="fa fa-search"></i></button>
+		                                class="fa fa-search"></i></button>
                             </span>
-			</div>
-		</form>
-		<!-- /.search form -->
-		<!-- sidebar menu: : style can be found in sidebar.less -->
-		<ul class="sidebar-menu">
-			<?php
-				foreach ($menus AS $menu){
+				</div>
+			</form>
+			<!-- /.search form -->
+			<!-- sidebar menu: : style can be found in sidebar.less -->
+			<ul class="sidebar-menu">
+				<?php
+				foreach ($menus AS $menu) {
 					$_mod = $menu['module'];
 					$subLinks = $menu['sub_links'];
-			?>
-			<li class="<?=count($subLinks)?'treeview':''?> <?=($_mod==$curModuleName)?'active':''?>">
-				<a href="<?=$menu['link']?>">
-					<span><?=$menu['text']?></span>
-					<?=count($subLinks)?'<i class="fa fa-angle-left pull-right"></i>':''?>
-				</a>
-				<?
-					if(count($subLinks)){
-				?>
-				<ul class="treeview-menu">
-				<?
-						foreach($subLinks AS $link){
-				?>
-					<li class="<?=$menu['action'] == $curAction?'active':''?>"><a href="<?=$link['link']?>"><i class="fa fa-angle-double-right"></i> <?=$link['text']?></a></li>
-				<?
+					?>
+					<li class="<?= count($subLinks) ? 'treeview' : '' ?> <?= ($_mod == $curModuleName) ? 'active' : '' ?>">
+						<a href="<?= $menu['link'] ?>">
+							<span><?= $menu['text'] ?></span>
+							<?= count($subLinks) ? '<i class="fa fa-angle-left pull-right"></i>' : '' ?>
+						</a>
+						<?
+						if (count($subLinks)) {
+							?>
+							<ul class="treeview-menu">
+								<li class="<?= $curAction == 'index' ? 'active' : '' ?>">
+									<a href="<?= $menu['link'] ?>">
+										<i class="fa fa-angle-double-right"></i> <?= $menu['text'] ?>
+									</a>
+								</li>
+								<?
+								foreach ($subLinks AS $link) {
+									?>
+									<li class="<?= $link['action'] == $curAction ? 'active' : '' ?>">
+										<a href="<?= $link['link'] ?>">
+											<i class="fa fa-angle-double-right"></i> <?= $link['text'] ?>
+										</a>
+									</li>
+								<?
+								}
+								?>
+							</ul>
+						<?
 						}
-				?>
-				</ul>
-				<?
-					}
-				?>
-			</li>
-			<?php
+						?>
+					</li>
+				<?php
 				}
-			?>
-		</ul>
-	</section>
-	<!-- /.sidebar -->
-</aside>
+				?>
+			</ul>
+		</section>
+		<!-- /.sidebar -->
+	</aside>
 
-<!-- Right side column. Contains the navbar and content of the page -->
-<aside class="right-side">
-<!-- Content Header (Page header) -->
-<section class="content-header">
-	<h1>
-		<?=$curModuleName?>
-		<small><?=ucwords($curAction)?></small>
-	</h1>
-	<ol class="breadcrumb">
-		<li class="<?=$curAction=='index'?'active':''?>"><a href="<?=$curMenu['link']?>"><?=$curMenu['text']?></a></li>
-        <?php
-            foreach($curMenu['sub_links'] AS $link){
-                if($link['action'] == $curAction){
-                    ?>
-                    <li class="active"><?=$link['text']?></li>
-                <?php
-                }
+	<!-- Right side column. Contains the navbar and content of the page -->
+	<aside class="right-side">
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+			<h1>
+				<?= $curModuleName ?>
+				<small><?= ucwords($curAction) ?></small>
+			</h1>
+			<ol class="breadcrumb">
+				<li class="<?= $curAction == 'index' ? 'active' : '' ?>"><a
+						href="<?= $curMenu['link'] ?>"><?= $curMenu['text'] ?></a></li>
+				<?php
+				foreach ($curMenu['sub_links'] AS $link) {
+					if ($link['action'] == $curAction) {
+						?>
+						<li class="active"><?= $link['text'] ?></li>
+					<?php
+					}
 
-            }
-        ?>
+				}
+				?>
 
-	</ol>
-</section>
+			</ol>
+		</section>
 
-<!-- Main content -->
-<section class="content">
+		<!-- Main content -->
+		<section class="content">
 
-<!-- Main row -->
-<div class="row">
-    <?php
-		include $curModule['controller'][$curAction];
-    ?>
-</div>
-<!-- /.row (main row) -->
+			<!-- Main row -->
+			<div class="row">
+				<?php
+				include $curModule['controller'][$curAction];
+				?>
+			</div>
+			<!-- /.row (main row) -->
 
-</section>
-<!-- /.content -->
-</aside>
-<!-- /.right-side -->
+		</section>
+		<!-- /.content -->
+	</aside>
+	<!-- /.right-side -->
 </div>
 <!-- ./wrapper -->
 
