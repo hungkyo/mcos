@@ -11,7 +11,7 @@
 	<!-- Ionicons -->
 	<link href="skin/css/ionicons.min.css" rel="stylesheet" type="text/css"/>
 	<!-- Morris chart -->
-	<link href="skin/css/morris/morris.css" rel="stylesheet" type="text/css"/>
+	<link href="skincss//morris/morris.css" rel="stylesheet" type="text/css"/>
 	<!-- jvectormap -->
 	<link href="skin/css/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css"/>
 	<!-- Date Picker -->
@@ -61,67 +61,6 @@
 </header>
 <div class="wrapper row-offcanvas row-offcanvas-left">
 	<!-- Left side column. contains the logo and sidebar -->
-	<aside class="left-side sidebar-offcanvas">
-		<!-- sidebar: style can be found in sidebar.less -->
-		<section class="sidebar">
-			<!-- Sidebar user panel -->
-
-			<!-- search form -->
-			<form action="#" method="get" class="sidebar-form">
-				<div class="input-group">
-					<input type="text" name="q" class="form-control" placeholder="Search..."/>
-                            <span class="input-group-btn">
-                                <button type='submit' name='seach' id='search-btn' class="btn btn-flat"><i
-		                                class="fa fa-search"></i></button>
-                            </span>
-				</div>
-			</form>
-			<!-- /.search form -->
-			<!-- sidebar menu: : style can be found in sidebar.less -->
-			<ul class="sidebar-menu">
-				<?php
-				foreach ($menus AS $menu) {
-					$_mod = $menu['module'];
-					$subLinks = $menu['sub_links'];
-					?>
-					<li class="<?= count($subLinks) ? 'treeview' : '' ?> <?= ($_mod == $curModuleName) ? 'active' : '' ?>">
-						<a href="<?= $menu['link'] ?>">
-							<span><?= $menu['text'] ?></span>
-							<?= count($subLinks) ? '<i class="fa fa-angle-left pull-right"></i>' : '' ?>
-						</a>
-						<?
-						if (count($subLinks)) {
-							?>
-							<ul class="treeview-menu">
-								<li class="<?= $curAction == 'index' && $curModuleName == $_mod ? 'active' : '' ?>">
-									<a href="<?= $menu['link'] ?>">
-										<i class="fa fa-angle-double-right"></i> <?= $menu['text'] ?>
-									</a>
-								</li>
-								<?
-								foreach ($subLinks AS $link) {
-									?>
-									<li class="<?= $link['action'] == $curAction ? 'active' : '' ?>">
-										<a href="<?= $link['link'] ?>">
-											<i class="fa fa-angle-double-right"></i> <?= $link['text'] ?>
-										</a>
-									</li>
-								<?
-								}
-								?>
-							</ul>
-						<?
-						}
-						?>
-					</li>
-				<?php
-				}
-				?>
-			</ul>
-		</section>
-		<!-- /.sidebar -->
-	</aside>
-
 	<!-- Right side column. Contains the navbar and content of the page -->
 	<aside class="right-side">
 		<!-- Content Header (Page header) -->
@@ -138,7 +77,6 @@
 					<?php
 					}
 					?>
-					<div class="clear"></div>
 				</div>
 				<div class="clear"></div>
 			<?php
@@ -153,7 +91,6 @@
 					<?php
 					}
 					?>
-					<div class="clear"></div>
 				</div>
 				<div class="clear"></div>
 			<?php
@@ -161,33 +98,43 @@
 			?>
 			<h1>
 				<?= $curModuleName ?>
-				<small><?= ucwords($curAction) ?></small>
+				<small>Login</small>
 			</h1>
-			<ol class="breadcrumb">
-				<li class="<?= $curAction == 'index' ? 'active' : '' ?>"><a
-						href="<?= $curMenu['link'] ?>"><?= $curMenu['text'] ?></a></li>
-				<?php
-				foreach ($curMenu['sub_links'] AS $link) {
-					if ($link['action'] == $curAction) {
-						?>
-						<li class="active"><?= $link['text'] ?></li>
-					<?php
-					}
-
-				}
-				?>
-
-			</ol>
 		</section>
 
 		<!-- Main content -->
 		<section class="content">
-
 			<!-- Main row -->
 			<div class="row">
-				<?php
-				include $curModule['controller'][$curAction];
-				?>
+				<div class="col-md-6">
+					<!-- general form elements -->
+					<div class="box box-primary">
+						<div class="box-header">
+							<h3 class="box-title">User Login</h3>
+						</div>
+						<!-- /.box-header -->
+						<!-- form start -->
+						<form role="form" action="login.php">
+							<div class="box-body">
+								<div class="form-group">
+									<label for="user">Username</label>
+									<input type="text" class="form-control" id="user" placeholder="E.g: admin"/>
+								</div>
+								<div class="form-group">
+									<label for="pass">Password</label>
+									<input type="password" class="form-control" id="pass"
+									       placeholder="E.g: adminpass"/>
+								</div>
+							</div>
+							<!-- /.box-body -->
+
+							<div class="box-footer">
+								<button type="submit" class="btn btn-primary">Submit</button>
+							</div>
+						</form>
+					</div>
+					<!-- /.box -->
+				</div>
 			</div>
 			<!-- /.row (main row) -->
 
@@ -199,7 +146,6 @@
 <!-- ./wrapper -->
 
 <!-- add new calendar event modal -->
-
 
 
 <!-- jQuery UI 1.10.3 -->

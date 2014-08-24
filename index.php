@@ -1,5 +1,10 @@
 <?php
 session_start();
+# check login status
+if(!$_SESSION['_login']){
+	header("Location: login.php");
+	die('');
+}
 #
 # load our bootstrap
 # but wait... dafuq is a bootstrap?
@@ -17,12 +22,6 @@ if($redirectURL = $coreSession->getRedirect()){
 }
 $mysql = new mysql;
 $mysql->connect($config['db_host'],$config['db_user'],$config['db_pass'],$config['db_name']);
-
-# check login status
-if($_SESSION['login_'] <> 'yes'){
-//	header("Location: login.php");
-//	die();
-}
 
 #catch the current module
 $curModuleName = $_GET['module'];
