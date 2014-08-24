@@ -93,7 +93,7 @@
 						if (count($subLinks)) {
 							?>
 							<ul class="treeview-menu">
-								<li class="<?= $curAction == 'index' ? 'active' : '' ?>">
+								<li class="<?= $curAction == 'index' && $curModuleName == $_mod ? 'active' : '' ?>">
 									<a href="<?= $menu['link'] ?>">
 										<i class="fa fa-angle-double-right"></i> <?= $menu['text'] ?>
 									</a>
