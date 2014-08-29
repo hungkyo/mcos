@@ -666,10 +666,19 @@ function _link($z){
 	}
 function getModel($name){
 	$className = $name;
-	if(class_exists($className)) return new $className;
+	if(class_exists($className)) {
+		$tempObj = new $className;
+		$_SESSION["the_last_".$name] = $tempObj;
+		return $tempObj;
+	}
 	$className = "{$name}Model";
-	if(class_exists($className)) return new $className;
+	if(class_exists($className)) {
+		$tempObj = new $className;
+		$_SESSION["the_last_".$name] = $tempObj;
+		return $tempObj;
+	}
 }
 function getSingleton($name){
-
+	if(isset($_SESSION["the_last_".$name])) return $_SESSION["the_last_".$name];
+	return getModel($name);
 }
