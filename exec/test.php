@@ -7,5 +7,5 @@ $st = microtime(true);
 		->setData('pass','Hungkyoho@1')
 //		->setData('initPath','test.localhost.com')
 		->connect();
-	$ftp->uploadDir('/var/www/test.localhost.com','test.localhost.com');
+	$ftp->uploadDir('/var/www/wp3.9.1','dafuqlol');
 var_dump(microtime(true)-$st);
