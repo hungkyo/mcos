@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
     /* For demo purposes */
     var demo = $("<div />").css({
         position: "fixed",
@@ -24,7 +24,7 @@ $(function() {
         "z-index": "999999"
     }).addClass("no-print");
     demo_settings.append(
-            "<h4 style='margin: 0 0 5px 0; border-bottom: 1px dashed #ddd; padding-bottom: 3px;'>Layout Options</h4>"
+        "<h4 style='margin: 0 0 5px 0; border-bottom: 1px dashed #ddd; padding-bottom: 3px;'>Layout Options</h4>"
             + "<div class='form-group no-margin'>"
             + "<div class='.checkbox'>"
             + "<label>"
@@ -33,9 +33,9 @@ $(function() {
             + "</label>"
             + "</div>"
             + "</div>"
-            );
+    );
     demo_settings.append(
-            "<h4 style='margin: 0 0 5px 0; border-bottom: 1px dashed #ddd; padding-bottom: 3px;'>Skins</h4>"
+        "<h4 style='margin: 0 0 5px 0; border-bottom: 1px dashed #ddd; padding-bottom: 3px;'>Skins</h4>"
             + "<div class='form-group no-margin'>"
             + "<div class='.radio'>"
             + "<label>"
@@ -53,9 +53,9 @@ $(function() {
             + "</label>"
             + "</div>"
             + "</div>"
-            );
+    );
 
-    demo.click(function() {
+    demo.click(function () {
         if (!$(this).hasClass("open")) {
             $(this).css("right", "200px");
             demo_settings.css("right", "0");

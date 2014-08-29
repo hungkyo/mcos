@@ -4,7 +4,6 @@
  * (c) 2013 Adam Shaw
  */
 
-
 .fc {
     direction: ltr;
     text-align: left;
@@ -25,8 +24,6 @@ html .fc,
     padding: 0;
     vertical-align: top;
 }
-
-
 
 /* Header
 ------------------------------------------------------------------------*/
@@ -56,7 +53,7 @@ html .fc,
 
 .fc-header-title h2 {
     margin-top: 0;
-    white-space: nowrap;    
+    white-space: nowrap;
 }
 
 .fc .fc-header-space {
@@ -74,8 +71,9 @@ html .fc,
     margin-right: -1px;
 }
 
-.fc-header .fc-corner-right,  /* non-theme */
-.fc-header .ui-corner-right { /* theme */
+.fc-header .fc-corner-right, /* non-theme */
+.fc-header .ui-corner-right {
+    /* theme */
     margin-right: 0; /* back to normal */
 }
 
@@ -95,8 +93,6 @@ html .fc,
     z-index: 4;
 }
 
-
-
 /* Content
 ------------------------------------------------------------------------*/
 
@@ -110,27 +106,27 @@ html .fc,
     overflow: hidden;
 }
 
-
-
 /* Cell Styles
 ------------------------------------------------------------------------*/
 
-.fc-widget-header,    /* <th>, usually */
-.fc-widget-content {  /* <td>, usually */
+.fc-widget-header, /* <th>, usually */
+.fc-widget-content {
+    /* <td>, usually */
     border: 1px solid #ddd;
 }
 
-.fc-state-highlight { /* <td> today cell */ /* TODO: add .fc-today to <th> */
+.fc-state-highlight {
+    /* <td> today cell */
+    /* TODO: add .fc-today to <th> */
     background: #fcf8e3;
 }
 
-.fc-cell-overlay { /* semi-transparent rectangle while dragging */
+.fc-cell-overlay {
+    /* semi-transparent rectangle while dragging */
     background: #bce8f1;
     opacity: .3;
     filter: alpha(opacity=30); /* for IE */
 }
-
-
 
 /* Buttons
 ------------------------------------------------------------------------*/
@@ -155,16 +151,19 @@ html .fc,
     user-select: none;
 }
 
-.fc-state-default { /* non-theme */
+.fc-state-default {
+    /* non-theme */
     border: 1px solid;
 }
 
-.fc-state-default.fc-corner-left { /* non-theme */
+.fc-state-default.fc-corner-left {
+    /* non-theme */
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
 }
 
-.fc-state-default.fc-corner-right { /* non-theme */
+.fc-state-default.fc-corner-right {
+    /* non-theme */
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
 }
@@ -182,7 +181,8 @@ html .fc,
 }
 
 .fc-button-prev .fc-text-arrow,
-.fc-button-next .fc-text-arrow { /* for &lsaquo; &rsaquo; */
+.fc-button-next .fc-text-arrow {
+    /* for &lsaquo; &rsaquo; */
     font-weight: bold;
 }
 
@@ -224,13 +224,12 @@ html .fc,
 
 .fc-button.fc-state-default {
     border: 1px solid #d9dadc;
-    border-bottom-color: #d3d5d7;  
+    border-bottom-color: #d3d5d7;
     border-bottom-width: 2px;
-    margin-left: 0px!important;
-    background: #fafafa;    
+    margin-left: 0px !important;
+    background: #fafafa;
     color: #666;
 }
-
 
 .fc-state-hover,
 .fc-state-down,
@@ -266,8 +265,6 @@ html .fc,
     box-shadow: none;
 }
 
-
-
 /* Global Event Styles
 ------------------------------------------------------------------------*/
 
@@ -283,7 +280,7 @@ html .fc,
 .fc-event {
     border: 1px solid #3a87ad; /* default BORDER color */
     background-color: #3a87ad; /* default BACKGROUND color */
-    color: #fff;               /* default TEXT color */
+    color: #fff; /* default TEXT color */
     font-size: .85em;
     cursor: default;
 }
@@ -317,11 +314,9 @@ a.fc-event,
     position: absolute;
     z-index: 99999;
     overflow: hidden; /* hacky spaces (IE6/7) */
-    font-size: 300%;  /* */
+    font-size: 300%; /* */
     line-height: 50%; /* */
 }
-
-
 
 /* Horizontal Events
 ------------------------------------------------------------------------*/
@@ -348,26 +343,24 @@ a.fc-event,
 /* resizable */
 
 .fc-event-hori .ui-resizable-e {
-    top: 0           !important; /* importants override pre jquery ui 1.7 styles */
-    right: -3px      !important;
-    width: 7px       !important;
-    height: 100%     !important;
+    top: 0 !important; /* importants override pre jquery ui 1.7 styles */
+    right: -3px !important;
+    width: 7px !important;
+    height: 100% !important;
     cursor: e-resize;
 }
 
 .fc-event-hori .ui-resizable-w {
-    top: 0           !important;
-    left: -3px       !important;
-    width: 7px       !important;
-    height: 100%     !important;
+    top: 0 !important;
+    left: -3px !important;
+    width: 7px !important;
+    height: 100% !important;
     cursor: w-resize;
 }
 
 .fc-event-hori .ui-resizable-handle {
     _padding-bottom: 14px; /* IE6 had 0 height */
 }
-
-
 
 /* Reusable Separate-border Table
 ------------------------------------------------------------*/
@@ -395,8 +388,6 @@ table.fc-border-separate {
 .fc-border-separate tbody tr.fc-first th {
     border-top-width: 0;
 }
-
-
 
 /* Month View, Basic Week View, Basic Day View
 ------------------------------------------------------------------------*/
@@ -447,8 +438,6 @@ table.fc-border-separate {
 .fc-rtl .fc-grid .fc-event-time {
     float: right;
 }
-
-
 
 /* Agenda Week View, Agenda Day View
 ------------------------------------------------------------------------*/
@@ -539,8 +528,6 @@ table.fc-border-separate {
     *border-top-style: solid; /* doesn't work with background in IE6/7 */
 }
 
-
-
 /* Vertical Events
 ------------------------------------------------------------------------*/
 
@@ -570,7 +557,8 @@ table.fc-border-separate {
     z-index: 2;
 }
 
-.fc-event-vert .fc-event-bg { /* makes the event lighter w/ a semi-transparent overlay  */
+.fc-event-vert .fc-event-bg {
+    /* makes the event lighter w/ a semi-transparent overlay  */
     position: absolute;
     z-index: 1;
     top: 0;
@@ -590,18 +578,19 @@ table.fc-border-separate {
 /* resizable */
 
 .fc-event-vert .ui-resizable-s {
-    bottom: 0        !important; /* importants override pre jquery ui 1.7 styles */
-    width: 100%      !important;
-    height: 8px      !important;
+    bottom: 0 !important; /* importants override pre jquery ui 1.7 styles */
+    width: 100% !important;
+    height: 8px !important;
     overflow: hidden !important;
     line-height: 8px !important;
-    font-size: 11px  !important;
+    font-size: 11px !important;
     font-family: monospace;
     text-align: center;
     cursor: s-resize;
 }
 
-.fc-agenda .ui-resizable-resizing { /* TODO: better selector */
+.fc-agenda .ui-resizable-resizing {
+    /* TODO: better selector */
     _overflow: hidden;
 }
 

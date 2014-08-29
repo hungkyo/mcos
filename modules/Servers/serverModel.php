@@ -1,8 +1,10 @@
 <?php
-Class serverModel extends Core_Resource_Model{
+
+Class serverModel extends Core_Resource_Model
+{
 	public function __construct()
 	{
-		$this->_table = 'server_';	
+		$this->_table = 'server_';
 		parent::__construct();
 	}
 }

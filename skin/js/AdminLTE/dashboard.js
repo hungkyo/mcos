@@ -5,7 +5,7 @@
  *      This is a demo file used only for the main dashboard (index.html)
  **/
 
-$(function() {
+$(function () {
     "use strict";
 
     //Make the dashboard widgets sortable Using jquery UI
@@ -30,21 +30,21 @@ $(function() {
     $(".textarea").wysihtml5();
 
     $('.daterange').daterangepicker(
-            {
-                ranges: {
-                    'Today': [moment(), moment()],
-                    'Yesterday': [moment().subtract('days', 1), moment().subtract('days', 1)],
-                    'Last 7 Days': [moment().subtract('days', 6), moment()],
-                    'Last 30 Days': [moment().subtract('days', 29), moment()],
-                    'This Month': [moment().startOf('month'), moment().endOf('month')],
-                    'Last Month': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
-                },
-                startDate: moment().subtract('days', 29),
-                endDate: moment()
+        {
+            ranges: {
+                'Today': [moment(), moment()],
+                'Yesterday': [moment().subtract('days', 1), moment().subtract('days', 1)],
+                'Last 7 Days': [moment().subtract('days', 6), moment()],
+                'Last 30 Days': [moment().subtract('days', 29), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
             },
-    function(start, end) {
-        alert("You chose: " + start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-    });
+            startDate: moment().subtract('days', 29),
+            endDate: moment()
+        },
+        function (start, end) {
+            alert("You chose: " + start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        });
 
     /* jQueryKnob */
     $(".knob").knob();
@@ -77,13 +77,15 @@ $(function() {
             }
         },
         series: {
-            regions: [{
+            regions: [
+                {
                     values: visitorsData,
                     scale: ["#92c1dc", "#ebf4f9"],
                     normalizeFunction: 'polynomial'
-                }]
+                }
+            ]
         },
-        onRegionLabelShow: function(e, el, code) {
+        onRegionLabelShow: function (e, el, code) {
             if (typeof visitorsData[code] != "undefined")
                 el.html(el.html() + ': ' + visitorsData[code] + ' new visitors');
         }
@@ -113,7 +115,7 @@ $(function() {
         fillColor: "#ebf4f9",
         height: '50',
         width: '80'
-    });    
+    });
 
     //The Calender
     $("#calendar").datepicker();
@@ -208,7 +210,7 @@ $(function() {
         hideHover: 'auto'
     });
     //Fix for charts under tabs
-    $('.box ul.nav a').on('shown.bs.tab', function(e) {
+    $('.box ul.nav a').on('shown.bs.tab', function (e) {
         area.redraw();
         donut.redraw();
     });
@@ -217,7 +219,7 @@ $(function() {
     /* BOX REFRESH PLUGIN EXAMPLE (usage with morris charts) */
     $("#loading-example").boxRefresh({
         source: "ajax/dashboard-boxrefresh-demo.php",
-        onLoadDone: function(box) {
+        onLoadDone: function (box) {
             bar = new Morris.Bar({
                 element: 'bar-chart',
                 resize: true,
@@ -241,10 +243,10 @@ $(function() {
 
     /* The todo list plugin */
     $(".todo-list").todolist({
-        onCheck: function(ele) {
+        onCheck: function (ele) {
             //console.log("The element has been checked")
         },
-        onUncheck: function(ele) {
+        onUncheck: function (ele) {
             //console.log("The element has been unchecked")
         }
     });

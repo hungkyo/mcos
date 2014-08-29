@@ -8,20 +8,20 @@ if ($_POST['submit']) {
 	$installed = $_POST['installed'];
 	$servers = getModel("server")->getAll()->addSelect('entity_id')->load();
 	$serverIds = array();
-	foreach ($servers AS $server){
+	foreach ($servers AS $server) {
 		$serverIds[] = $server->getId();
 	}
-	$domains = explode("\n",$domains);
+	$domains = explode("\n", $domains);
 	$count = 0;
-	foreach ($domains AS $domainName){
+	foreach ($domains AS $domainName) {
 		$domainName = trim($domainName);
 		$domainName = strtolower($domainName);
-		if($domainName){
+		if ($domainName) {
 			$domain = getModel("domain");
-			$domain->setData('name',$domainName)
-				->setData('active',$active)
-				->setData('installed',$installed)
-				->setData('server',$serverIds[mt_rand(0,count($serverIds)-1)]);
+			$domain->setData('name', $domainName)
+				->setData('active', $active)
+				->setData('installed', $installed)
+				->setData('server', $serverIds[mt_rand(0, count($serverIds) - 1)]);
 			$domain->save();
 			$count++;
 		}
@@ -50,6 +50,7 @@ google2.com.vn
 ..."></textarea>
 				</div>
 				<b>Server: Random!</b>
+
 				<div class="form-group">
 					<label for="active">Active</label>
 					&nbsp;&nbsp;&nbsp;<input type="checkbox" id="active"

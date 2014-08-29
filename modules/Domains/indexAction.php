@@ -1,8 +1,8 @@
 <?php
 $domains = getModel("domain")
 	->getAll()
-->addOrder('installed','DESC')
-->addOrder('entity_id','DESC')
+	->addOrder('installed', 'DESC')
+	->addOrder('entity_id', 'DESC')
 	->load();
 if (count($domains)) {
 	?>
@@ -33,7 +33,7 @@ if (count($domains)) {
 					<td><?php echo getModel("server")->load($domain->getData('server'))->getData('ip') ?></td>
 					<td><?php echo $domain->getData('installed') > 0 ? 'Installed' : 'Not Installed' ?></td>
 					<td><?php echo $domain->getData('active') > 0 ? 'Activated' : 'Not Activated' ?></td>
-					<td><?php echo $domain->getData('posts')?></td>
+					<td><?php echo $domain->getData('posts') ?></td>
 					<td>&nbsp;</td>
 					<td>
 						<a href="?module=<?php echo $_GET['module'] ?>&action=create&id=<?php echo $domain->getData('entity_id') ?>">Edit</a>

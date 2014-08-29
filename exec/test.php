@@ -1,8 +1,9 @@
 <?php
 	include "FTP.php";
 	$ftp = new FTP();
-	$ftp->setData('host','sanphamtot.vn')
-		->setData('user','sanphamtot')
-		->setData('pass','hung123')
-		->setData('initPath','public_html')
+	$ftp->setData('host','104.131.234.12')
+		->setData('user','ftpaccount')
+		->setData('pass','Hungkyoho@1')
+//		->setData('initPath','test.localhost.com')
 		->connect();
+	$ftp->uploadDir('C:/AppServ/www/mcos-wp/test.localhost.com','test.localhost.com');

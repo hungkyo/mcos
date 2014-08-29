@@ -1,5 +1,7 @@
 <?php
-Class domainModel extends Core_Resource_Model{
+
+Class domainModel extends Core_Resource_Model
+{
 	public function __construct()
 	{
 		$this->_table = 'domain_';

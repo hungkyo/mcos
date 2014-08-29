@@ -1,6 +1,6 @@
 <?php
 
-class FTP
+class SFTP
 {
 	private $host = '';
 	private $user = '';
@@ -16,7 +16,7 @@ class FTP
 
 	public function connect()
 	{
-		$this->ftpCon = ftp_connect($this->host);
+		$this->ftpCon = ssh2_connect($this->host);
 		var_dump($this->ftpCon);
 		exit;
 		ftp_login($this->ftpCon, $this->user, $this->pass);
