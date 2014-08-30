@@ -123,7 +123,7 @@ Abstract Class Core_Resource_Model
 		{$limit}");
 		if (!$val) {
 			// this one is for the collection
-			while ($r = mysql_fetch_array($q, MYSQL_ASSOC)) {
+			while ($r = mysqli_fetch_array($q, MYSQL_ASSOC)) {
 				$tempObj = get_class($this);
 				$tempObj = new $tempObj;
 				foreach ($r AS $k => $v) $tempObj->setData($k, $v);
@@ -132,7 +132,7 @@ Abstract Class Core_Resource_Model
 			return $this->_collection;
 		} else {
 			// return the object
-			$r = mysql_fetch_array($q, MYSQL_ASSOC);
+			$r = mysqli_fetch_array($q, MYSQL_ASSOC);
 			foreach ($r AS $k => $v) $this->setData($k, $v);
 			return $this;
 		}

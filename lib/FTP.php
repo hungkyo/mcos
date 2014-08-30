@@ -64,12 +64,13 @@ class FTP
 
 	public function uploadDir($localDir, $remoteDir)
 	{
-		if (!$this->dirExists($remoteDir)) $this->makeDir($remoteDir);
 		$ignores = array(
 			'.',
 			'..',
 			'Thumbs.db',
 		);
+		if (in_array($localDir, $ignores)) return;
+		if (!$this->dirExists($remoteDir)) $this->makeDir($remoteDir);
 		$directory = opendir($localDir);
 		while ($file = readdir($directory)) {
 			if (in_array($file, $ignores)) continue;
