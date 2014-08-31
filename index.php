@@ -15,12 +15,12 @@ for($i=2;$i<count($scanResults);$i++) {
 }
 include "config.php";
 include "functions.php";
-$coreSession = getSingleton("Core_Session_Message");
+$coreSession = getModel("Core_Session_Message");
 if($redirectURL = $coreSession->getRedirect()){
 	header("Location: $redirectURL");
 	exit;
 }
-$mysql = getSingleton('DB');
+$mysql = getModel('DB');
 $mysql->connect($config['db_host'],$config['db_user'],$config['db_pass'],$config['db_name']);
 
 #catch the current module
