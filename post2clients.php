@@ -3,17 +3,18 @@ session_start();
 #
 # load our bootstrap
 # but wait... dafuq is a bootstrap?
-$scanResults = scandir("lib");
-foreach (glob("lib/*.php") AS $file) {
+$thisDir = dirname(__FILE__). '/';
+foreach (glob($thisDir."lib/*.php") AS $file) {
 	include_once $file;
 }
-include "config.php";
-include "functions.php";
+
+include $thisDir."config.php";
+include $thisDir."functions.php";
 $mysql = getModel('DB');
 $mysql->connect($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
 
-include 'modules/Servers/serverModel.php';
-include 'modules/Domains/domainModel.php';
+include $thisDir.'modules/Servers/serverModel.php';
+include $thisDir.'modules/Domains/domainModel.php';
 
 $domain = getModel('domain');
 $domainCollection = $domain->addFilter(array('active' => 1))
