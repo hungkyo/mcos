@@ -4,10 +4,9 @@ session_start();
 # load our bootstrap
 # but wait... dafuq is a bootstrap?
 $thisDir = dirname(__FILE__). '/';
-$scanResults = scandir($thisDir."lib");
-for ($i = 2; $i < count($scanResults); $i++) {
-	$scanResult = "lib/{$scanResults[$i]}";
-	include_once $scanResult;
+define('thisDir',$thisDir);
+foreach (glob(thisDir."lib/*.php") AS $file) {
+	include_once $file;
 }
 include $thisDir."config.php";
 include $thisDir."functions.php";

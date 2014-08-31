@@ -32,8 +32,8 @@ class installWP
 	}
 	public function mkTempDir()
 	{
-		$this->cpDir('origin/originClientCode', 'temp/' . $this->domain);
-		$tempConfig = file_get_contents('temp/' . $this->domain . '/wp-config.php');
+		$this->cpDir('origin/originClientCode', thisDir.'temp/' . $this->domain);
+		$tempConfig = file_get_contents(thisDir.'temp/' . $this->domain . '/wp-config.php');
 		$tempConfig = str_replace(array(
 			'{DBNAME}',
 			'{DBUSER}',
@@ -43,7 +43,7 @@ class installWP
 			$this->server->getData('dbuser'),
 			$this->server->getData('dbpass'),
 		), $tempConfig);
-		file_put_contents('temp/' . $this->domain . '/wp-config.php', $tempConfig);
+		file_put_contents(thisDir.'temp/' . $this->domain . '/wp-config.php', $tempConfig);
 		return $this;
 	}
 
@@ -97,7 +97,7 @@ class installWP
 
 	public function uploadClient()
 	{
-		$this->ftp->uploadDir('temp/'.$this->domain, "/var/www/mcos-wp/".$this->domain);
+		$this->ftp->uploadDir(thisDir.'temp/'.$this->domain, "/var/www/mcos-wp/".$this->domain);
 		return $this;
 	}
 
@@ -109,13 +109,13 @@ class installWP
 		), array(
 			$this->domain,
 		), $tempConfig);
-		file_put_contents("temp/{$this->domain}.conf", $tempConfig);
+		file_put_contents(thisDir."temp/{$this->domain}.conf", $tempConfig);
 		return $this;
 	}
 
 	public function uploadConfFile()
 	{
-		$this->ftp->upload("temp/{$this->domain}.conf", "/var/www/vconf/{$this->domain}.conf");
+		$this->ftp->upload(thisDir."temp/{$this->domain}.conf", "/var/www/vconf/{$this->domain}.conf");
 		return $this;
 	}
 }
