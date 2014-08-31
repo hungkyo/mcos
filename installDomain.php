@@ -38,4 +38,5 @@ foreach ($domains AS $domain) {
 		->uploadConfFile();
 	$domain->setData('installed', 1)
 		->save();
+	echo $domain->getData('name')."\r\n";
 }
