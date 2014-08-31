@@ -30,10 +30,10 @@ foreach ($domains AS $domain) {
 		->connectFTP()
 		//->mkDB()
 		//->dumpDB()
-		//->mkTempDir()
-		->mkConfFile()
-		//->uploadClient()
-		->uploadConfFile();
+		->mkTempDir()
+//		->mkConfFile()
+		->uploadClient();
+//		->uploadConfFile();
 //	$domain->setData('installed', 1)
 //		->save();
 	echo $domain->getData('name')."\r\n";
