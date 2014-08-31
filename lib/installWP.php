@@ -32,7 +32,7 @@ class installWP
 	}
 	public function mkTempDir()
 	{
-		$this->cpDir('origin/originClientCode', thisDir.'temp/' . $this->domain);
+		$this->cpDir(thisDir.'origin/originClientCode', thisDir.'temp/' . $this->domain);
 		$tempConfig = file_get_contents(thisDir.'temp/' . $this->domain . '/wp-config.php');
 		$tempConfig = str_replace(array(
 			'{DBNAME}',
@@ -71,7 +71,7 @@ class installWP
 
 	public function dumpDB()
 	{
-		$originDB = file_get_contents('origin/originDB.sql');
+		$originDB = file_get_contents(thisDir.'origin/originDB.sql');
 		$originDBA = explode("\n", $originDB);
 		$q = '';
 		foreach ($originDBA AS $r) {
@@ -103,7 +103,7 @@ class installWP
 
 	public function mkConfFile()
 	{
-		$tempConfig = file_get_contents('origin/tempvHost.conf');
+		$tempConfig = file_get_contents(thisDir.'origin/tempvHost.conf');
 		$tempConfig = str_replace(array(
 			'{DOMAIN}',
 		), array(
