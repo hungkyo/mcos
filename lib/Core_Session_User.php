@@ -12,16 +12,17 @@ class Core_Session_User
 	{
 		$sessionMessage = getModel("Core_Session_Message");
 		$user = getModel("Core_User");
-		$user->addFilter('user', $userName)
-			->addFilter('pass', $pass)
+		$usr = $user->addFilter(array('user'=>$userName))
+ 			->addFilter(array('pass' => $pass))
 			->load();
-		if (count($user)) {
-			$user = array_shift($user);
+		if (count($usr)) {
+			$user = array_shift($usr);
 			$_SESSION['_user'] = $user;
 			$_SESSION['_login'] = true;
 			$sessionMessage->addSuccess('Successfully logged in!');
 			$sessionMessage->addRedirect('index.php');
 		} else {
+			$sessionMessage->addError(var_export($_POST,true));
 			$sessionMessage->addError('The User name and Password is incorrect!');
 			$sessionMessage->addRedirect('login.php');
 		}

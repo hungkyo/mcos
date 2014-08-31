@@ -15,14 +15,9 @@ if($redirectURL = $coreSession->getRedirect()){
 	header("Location: $redirectURL");
 	exit;
 }
-$mysql = new mysql;
+$mysql = new DB;
 $mysql->connect($config['db_host'],$config['db_user'],$config['db_pass'],$config['db_name']);
 
-# check login status
-if($_SESSION['login_'] <> 'yes'){
-//	header("Location: login.php");
-//	die();
-}
 if($_POST['submit']){
 	$sessionUser = getModel("Core_Session_User");
 	$sessionUser->login($_POST['user'],$_POST['pass']);

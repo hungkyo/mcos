@@ -17,6 +17,7 @@ include 'modules/Domains/domainModel.php';
 
 $domain = getModel('domain');
 $domainCollection = $domain->addFilter(array('active' => 1))
+	->addFilter(array('installed' => 1))
 	->addOrder('posts', 'ASC')
 	->setCurPage(1)
 	->setPageSize(1)
@@ -28,20 +29,22 @@ $postCollection = $post->addFilter(array('posted' => 0))
 	->setCurPage(1)
 	->setPageSize(20)
 	->load();
-foreach($postCollection AS $post){
+foreach ($postCollection AS $post) {
 	$data[] = array(
 		'title' => $post->getData('title'),
 		'content' => $post->getData('content'),
-		'tag' => explode(',',$post->getData('tag')),
-		'cat' => explode(',',$post->getData('cat')),
+		'tag' => explode(',', $post->getData('tag')),
+		'cat' => explode(',', $post->getData('cat')),
 	);
+	$post->setData('posted', 1)
+		->save();
 }
 
 $data = serialize($data);
 $data = gzencode($data);
 $data = base64_encode($data);
 
-$x = get_curl('http://'.$domainName.'/postapi.php',array(
+$x = get_curl('http://' . $domainName . '/postapi.php', array(
 	'mpost' => true,
 	'mpostfield' => array(
 		'data' => $data,
@@ -49,4 +52,6 @@ $x = get_curl('http://'.$domainName.'/postapi.php',array(
 	),
 ));
 
-var_dump($x);
+$curPost = $domain->getData('posts');
+$domain->setData('posts', $curPost + count($postCollection))
+	->save();
