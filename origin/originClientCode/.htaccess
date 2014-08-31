@@ -3,6 +3,11 @@
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteBase /
+
+#block some shit out
+RewriteCond %{HTTP_USER_AGENT} ^.*(Baiduspider|HTTrack|Yandex|NerdyBot|majestic12|CRAZYWEBCRAWLER|archive.org_bot|AhrefsBot).*$ [NC]
+RewriteRule .* - [F,L]
+
 RewriteRule ^index\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
