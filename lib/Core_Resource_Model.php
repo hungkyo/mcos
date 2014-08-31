@@ -64,6 +64,18 @@ Abstract Class Core_Resource_Model
 		return $this;
 	}
 
+	public function setCurPage($curPage)
+	{
+		$this->curPage = $curPage;
+		return $this;
+	}
+
+	public function setPageSize($pageSize)
+	{
+		$this->pageSize = $pageSize;
+		return $this;
+	}
+
 	public function load($val = '', $key = 'entity_id')
 	{
 		$startResult = ($this->curPage - 1) * $this->pageSize;

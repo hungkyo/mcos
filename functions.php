@@ -203,7 +203,6 @@ function get_curl($url,$attr = array()) {
 		$curl = curl_init();
 		$a = array(
 			'useheader' => false,
-			// 'useragent' => 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36',
 			'useragent' => 'Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Maxthon/4.2.1.1000 Chrome/30.0.1551.0 Safari/537.36',
 			'referer' => '',
 			'autoreferer' => true,
