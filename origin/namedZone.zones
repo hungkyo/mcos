@@ -1,6 +1,6 @@
 zone "{DOMAIN}" IN {
         type master;
-        file "{DOMAIN}";
+        file "/var/www/named-zones/{DOMAIN}";
         allow-update { none; };
 };
 
