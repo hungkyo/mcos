@@ -1,0 +1,6 @@
+zone "{DOMAIN}" IN {
+        type master;
+        file "{DOMAIN}";
+        allow-update { none; };
+};
+

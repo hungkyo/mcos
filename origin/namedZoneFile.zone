@@ -1,0 +1,16 @@
+$TTL 86400
+@   IN  SOA     ns1.{DOMAIN}. root.{DOMAIN}. (
+        2013042201  ;Serial
+        3600        ;Refresh
+        1800        ;Retry
+        604800      ;Expire
+        86400       ;Minimum TTL
+)
+		IN	NS		ns1.{DOMAIN}.
+		IN	NS		ns2.{DOMAIN}.
+
+ns1		IN	A		107.170.188.87
+ns2		IN	A		107.170.188.87
+
+@		IN	A		{SERVERIP}
+www		IN	CNAME		@

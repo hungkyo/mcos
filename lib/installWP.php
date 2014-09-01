@@ -13,13 +13,15 @@ class installWP
 		$this->$key = $value;
 		return $this;
 	}
-	public function cpDir($source,$dest){
+
+	public function cpDir($source, $dest)
+	{
 		$ignores = array(
 			'.',
 			'..',
 			'Thumbs.db',
 		);
-		if(!file_exists($dest)) mkdir($dest);
+		if (!file_exists($dest)) mkdir($dest);
 		$directory = opendir($source);
 		while ($file = readdir($directory)) {
 			if (in_array($file, $ignores)) continue;
@@ -30,10 +32,11 @@ class installWP
 			}
 		}
 	}
+
 	public function mkTempDir()
 	{
-		$this->cpDir(thisDir.'origin/originClientCode', thisDir.'temp/' . $this->domain);
-		$tempConfig = file_get_contents(thisDir.'temp/' . $this->domain . '/wp-config.php');
+		$this->cpDir(thisDir . 'origin/originClientCode', thisDir . 'temp/' . $this->domain);
+		$tempConfig = file_get_contents(thisDir . 'temp/' . $this->domain . '/wp-config.php');
 		$tempConfig = str_replace(array(
 			'{DBNAME}',
 			'{DBUSER}',
@@ -43,7 +46,7 @@ class installWP
 			$this->server->getData('dbuser'),
 			$this->server->getData('dbpass'),
 		), $tempConfig);
-		file_put_contents(thisDir.'temp/' . $this->domain . '/wp-config.php', $tempConfig);
+		file_put_contents(thisDir . 'temp/' . $this->domain . '/wp-config.php', $tempConfig);
 		return $this;
 	}
 
@@ -71,13 +74,13 @@ class installWP
 
 	public function dumpDB()
 	{
-		$originDB = file_get_contents(thisDir.'origin/originDB.sql');
+		$originDB = file_get_contents(thisDir . 'origin/originDB.sql');
 		$originDBA = explode("\n", $originDB);
 		$q = '';
 		foreach ($originDBA AS $r) {
-			$r = str_replace('{DOMAINNAME}',$this->domain,$r);
+			$r = str_replace('{DOMAINNAME}', $this->domain, $r);
 			$q .= "\n$r";
-			if($r[strlen($r)-1] == ';'){
+			if ($r[strlen($r) - 1] == ';') {
 				$this->db->query($q);
 				$q = '';
 			}
@@ -97,25 +100,47 @@ class installWP
 
 	public function uploadClient()
 	{
-		$this->ftp->uploadDir(thisDir.'temp/'.$this->domain, "/var/www/mcos-wp/".$this->domain);
+		$this->ftp->uploadDir(thisDir . 'temp/' . $this->domain, "/var/www/mcos-wp/" . $this->domain);
 		return $this;
 	}
 
 	public function mkConfFile()
 	{
-		$tempConfig = file_get_contents(thisDir.'origin/tempvHost.conf');
+		$tempConfig = file_get_contents(thisDir . 'origin/tempvHost.conf');
 		$tempConfig = str_replace(array(
 			'{DOMAIN}',
 		), array(
 			$this->domain,
 		), $tempConfig);
-		file_put_contents(thisDir."temp/{$this->domain}.conf", $tempConfig);
+		file_put_contents(thisDir . "temp/{$this->domain}.conf", $tempConfig);
+		return $this;
+	}
+
+	public function addZone()
+	{
+		$originZone = file_get_contents(thisDir . 'origin/namedZone.zones');
+		$tempZone = str_replace('{DOMAIN}', $this->domain, $originZone);
+		file_put_contents("/var/www/named-zones/all.zone", $tempZone, FILE_APPEND);
+		return $this;
+	}
+
+	public function makeZoneFile()
+	{
+		$originZoneFile = file_get_contents(thisDir . 'origin/namedZoneFile.zone');
+		$tempZone = str_replace(array(
+			'{DOMAIN}',
+			'{SERVERIP}',
+		), array(
+			$this->domain,
+			$this->server->getData('ip')
+		), $originZoneFile);
+		file_put_contents("/var/www/named-zones/{$this->domain}", $tempZone);
 		return $this;
 	}
 
 	public function uploadConfFile()
 	{
-		$this->ftp->upload(thisDir."temp/{$this->domain}.conf", "/var/www/vconf/{$this->domain}.conf");
+		$this->ftp->upload(thisDir . "temp/{$this->domain}.conf", "/var/www/vconf/{$this->domain}.conf");
 		return $this;
 	}
 }
