@@ -120,7 +120,7 @@ class installWP
 	{
 		$originZone = file_get_contents(thisDir . 'origin/namedZone.zones');
 		$tempZone = str_replace('{DOMAIN}', $this->domain, $originZone);
-		file_put_contents("/var/www/named-zones/all.zone", $tempZone, FILE_APPEND);
+		file_put_contents("/var/www/named-zones/all.zones", $tempZone, FILE_APPEND);
 		return $this;
 	}
 
