@@ -120,12 +120,14 @@ class installWP
 	{
 		$originZone = file_get_contents(thisDir . 'origin/namedZone.zones');
 		$tempZone = str_replace('{DOMAIN}', $this->domain, $originZone);
-		$curZones = file_get_contents("/var/www/named-zones/all.zones");
-		if (strpos($curZones,$this->domain)){
-			$find = cut($curZones,'#'.$this->domain,'#'.$this->domain);
-			if($find) $curZones = str_replace($find,$tempZone,$curZones);
-			file_put_contents("/var/www/named-zones/all.zones", $curZones);
-		}else file_put_contents("/var/www/named-zones/all.zones", $tempZone, FILE_APPEND);
+		if (file_exists("/var/www/named-zones/all.zones")) {
+			$curZones = file_get_contents("/var/www/named-zones/all.zones");
+			if (strpos($curZones, $this->domain)) {
+				$find = cut($curZones, '#' . $this->domain, '#' . $this->domain);
+				if ($find) $curZones = str_replace($find, $tempZone, $curZones);
+				file_put_contents("/var/www/named-zones/all.zones", $curZones);
+			} else file_put_contents("/var/www/named-zones/all.zones", $tempZone, FILE_APPEND);
+		} else file_put_contents("/var/www/named-zones/all.zones", $tempZone, FILE_APPEND);
 		return $this;
 	}
 
