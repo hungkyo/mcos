@@ -26,13 +26,15 @@ foreach ($domains AS $domain) {
 	$install = getModel('installWP');
 	$install->setData('domain', $domain->getData('name'));
 	$install->setData('server', $server);
-	$install//->connectDB()
+	$install->connectDB()
 		->connectFTP()
-		//->mkDB()
+		->mkDB()
+		->addZone()
+		->makeZoneFile();
 		//->dumpDB()
-		->mkTempDir()
+//		->mkTempDir()
 //		->mkConfFile()
-		->uploadClient();
+//		->uploadClient();
 //		->uploadConfFile();
 //	$domain->setData('installed', 1)
 //		->save();
