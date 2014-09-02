@@ -19,10 +19,12 @@ include $thisDir.'modules/Domains/domainModel.php';
 $domain = getModel('domain');
 $domainCollection = $domain->addFilter(array('active' => 1))
 	->addFilter(array('installed' => 1))
+	->addFilter('posts < 20000')
 	->addOrder('posts', 'ASC')
 	->setCurPage(1)
 	->setPageSize(1)
 	->load();
+var_dump($domainCollection);
 $domain = $domainCollection[0];
 $domainName = $domain->getData('name');
 $post = getModel('post');

@@ -93,22 +93,26 @@ Abstract Class Core_Resource_Model
 			foreach ($this->_filterAttribute AS $filter) {
 				// or => array('key' => 'val','key2' => 'val2')
 				// and => array('key' => 'val','key2' => 'val2')
-				foreach ($filter AS $cond => $fil) {
-					$whereTemp = array();
-					if (is_array($fil)) {
-						foreach ($fil AS $keyFil => $valFil) {
-							if (is_array($valFil)) {
-								foreach ($valFil AS $key => $val) {
-									$whereTemp[] = "{$key}=" . var_export($val, true);
-								}
-							} else $whereTemp[] = "{$keyFil}=" . var_export($valFil, true);
+				if (is_array($filter)) {
+					foreach ($filter AS $cond => $fil) {
+						$whereTemp = array();
+						if (is_array($fil)) {
+							foreach ($fil AS $keyFil => $valFil) {
+								if (is_array($valFil)) {
+									foreach ($valFil AS $key => $val) {
+										$whereTemp[] = "{$key}=" . var_export($val, true);
+									}
+								} else $whereTemp[] = "{$keyFil}=" . var_export($valFil, true);
+							}
+							$whereTemp = '(' . implode(" $cond ", $whereTemp) . ')';
+						} else {
+							$whereTemp = "{$cond}=" . var_export($fil, true);
 						}
-						$whereTemp = '(' . implode(" $cond ", $whereTemp) . ')';
-					} else {
-						$whereTemp = "{$cond}=" . var_export($fil, true);
 					}
+					$where[] = $whereTemp;
+				} else {
+					$where[] = $filter;
 				}
-				$where[] = $whereTemp;
 			}
 		} elseif ($val) {
 			$where[] = "$key = " . var_export($val, true);
