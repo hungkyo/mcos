@@ -30,7 +30,7 @@ $domainName = $domain->getData('name');
 $post = getModel('post');
 $postCollection = $post->addFilter(array('posted' => 0))
 	->setCurPage(1)
-	->setPageSize(20)
+	->setPageSize(35)
 	->load();
 foreach ($postCollection AS $post) {
 	$data[] = array(
