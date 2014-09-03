@@ -117,7 +117,7 @@ INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`
 (18, 'default_comment_status', 'open', 'yes'),
 (19, 'default_ping_status', 'open', 'yes'),
 (20, 'default_pingback_flag', '1', 'yes'),
-(21, 'posts_per_page', '10', 'yes'),
+(21, 'posts_per_page', '50', 'yes'),
 (22, 'date_format', 'F j, Y', 'yes'),
 (23, 'time_format', 'g:i a', 'yes'),
 (24, 'links_updated_date_format', 'F j, Y g:i a', 'yes'),
