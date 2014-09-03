@@ -30,11 +30,12 @@ foreach ($domains AS $domain) {
 		->connectFTP()
 		->mkDB()
 		->addZone()
-		->makeZoneFile();
+//		->makeZoneFile();
 		//->dumpDB()
-//		->mkTempDir()
+		->mkTempDir('origin/replacehtaccess')
 //		->mkConfFile()
-//		->uploadClient();
+		->uploadClient()
+		->cleanUp();
 //		->uploadConfFile();
 //	$domain->setData('installed', 1)
 //		->save();
