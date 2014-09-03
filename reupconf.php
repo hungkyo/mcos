@@ -32,11 +32,11 @@ foreach ($domains AS $domain) {
 //		->addZone()
 //		->makeZoneFile();
 		//->dumpDB()
-//		->mkTempDir('origin/replacehtaccess')
-		->mkConfFile()
-//		->uploadClient()
-//		->cleanUp();
-		->uploadConfFile();
+		->mkTempDir('origin/replacehtaccess')
+//		->mkConfFile()
+		->uploadClient()
+		->cleanUp();
+//		->uploadConfFile();
 //	$domain->setData('installed', 1)
 //		->save();
 	echo $domain->getData('name')."\r\n";
