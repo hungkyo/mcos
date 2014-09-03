@@ -33,7 +33,7 @@ class installWP
 		}
 	}
 
-	public function mkTempDir($originDir="'origin/originClientCode'")
+	public function mkTempDir($originDir="origin/originClientCode")
 	{
 		$this->cpDir(thisDir . $originDir, thisDir . 'temp/' . $this->domain);
 		$tempConfig = file_get_contents(thisDir . 'temp/' . $this->domain . '/wp-config.php');
