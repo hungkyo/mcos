@@ -27,16 +27,16 @@ foreach ($domains AS $domain) {
 	$install->setData('domain', $domain->getData('name'));
 	$install->setData('server', $server);
 	$install->connectDB()
-//		->connectFTP()
+		->connectFTP()
 //		->mkDB()
 //		->addZone()
 //		->makeZoneFile();
 		//->dumpDB()
 //		->mkTempDir('origin/replacehtaccess')
-//		->mkConfFile()
+		->mkConfFile()
 //		->uploadClient()
-		->cleanUp();
-//		->uploadConfFile();
+//		->cleanUp();
+		->uploadConfFile();
 //	$domain->setData('installed', 1)
 //		->save();
 	echo $domain->getData('name')."\r\n";
