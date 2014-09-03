@@ -28,11 +28,11 @@ foreach ($domains AS $domain) {
 	$install->setData('server', $server);
 	$install->connectDB()
 		->connectFTP()
-//		->mkDB()
+		->mkDB()
 //		->addZone()
 //		->makeZoneFile();
 		//->dumpDB()
-		->mkTempDir('origin/replacehtaccess')
+		->mkTempDir()
 //		->mkConfFile()
 		->uploadClient()
 		->cleanUp();
