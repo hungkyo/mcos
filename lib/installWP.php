@@ -151,7 +151,7 @@ class installWP
 		return $this;
 	}
 	public function cleanUp(){
-		shell_exec("rm -f ".thisDir.'temp/'.$this->domain);
+		shell_exec("rm -rf ".thisDir.'temp/'.$this->domain);
 		return $this;
 	}
 }
