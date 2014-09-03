@@ -1,0 +1,17 @@
+
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+
+#block some shit out
+RewriteCond %{HTTP_USER_AGENT} ^.*(Baiduspider|HTTrack|Yandex|NerdyBot|majestic|CRAZYWEBCRAWLER|archive.org_bot|AhrefsBot|Nutch-1.3|NetShelter|FlipboardProxy|LivelapBot|PaperLiBot|uMBot|Jakarta|Crowsnest|Java|Ruby|FTRF).*$ [NC]
+RewriteRule .* - [F,L]
+
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+
+# END WordPress
