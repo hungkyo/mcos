@@ -37,7 +37,8 @@ foreach ($domains AS $domain) {
 		->uploadClient()
 		->addZone()
 		->makeZoneFile()
-		->uploadConfFile();
+		->uploadConfFile()
+		->cleanUp();
 	$domain->setData('installed', 1)
 		->save();
 	echo $domain->getData('name') . "\r\n";

@@ -33,9 +33,9 @@ class installWP
 		}
 	}
 
-	public function mkTempDir()
+	public function mkTempDir($originDir="'origin/originClientCode'")
 	{
-		$this->cpDir(thisDir . 'origin/originClientCode', thisDir . 'temp/' . $this->domain);
+		$this->cpDir(thisDir . $originDir, thisDir . 'temp/' . $this->domain);
 		$tempConfig = file_get_contents(thisDir . 'temp/' . $this->domain . '/wp-config.php');
 		$tempConfig = str_replace(array(
 			'{DBNAME}',
@@ -148,6 +148,10 @@ class installWP
 	public function uploadConfFile()
 	{
 		$this->ftp->upload(thisDir . "temp/{$this->domain}.conf", "/var/www/vconf/{$this->domain}.conf");
+		return $this;
+	}
+	public function cleanUp(){
+		shell_exec("rm -f ".thisDir.$this->domain);
 		return $this;
 	}
 }
