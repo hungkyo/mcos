@@ -48,8 +48,19 @@ class FTP
 
 	public function removeDir($dir)
 	{
-		var_dump(ftp_exec($this->ftpCon,'rm -r '.$dir));
-		var_dump($dir);
+		$dir = rtrim($dir, '/');
+		$ignores = array(
+			$dir . '/.',
+			$dir . '/..',
+		);
+		$rdir = '-a ' . $dir;
+		$nlist = ftp_nlist($this->ftpCon, $rdir);
+		foreach ($nlist AS $path) {
+			if (in_array($path, $ignores)) continue;
+			if ($this->removeFile($path) == false) {
+				$this->removeDir($path);
+			}
+		}
 		@ftp_rmdir($this->ftpCon, $dir);
 		return $this;
 	}
@@ -85,8 +96,10 @@ class FTP
 		}
 		return $this;
 	}
-	public function removeFile($path){
-		@ftp_delete($this->ftpCon,$path);
-		return $this;
+
+	public function removeFile($path)
+	{
+		if (@ftp_delete($this->ftpCon, $path)) return $this;
+		else return false;
 	}
 }
