@@ -11,6 +11,7 @@ include_once "lib/DB.php";
 include_once "lib/post.php";
 include_once "modules/Domains/domainModel.php";
 include_once "config.php";
+include_once "functions.php";
 
 $mysql = getModel('DB');
 $mysql->connect($config['db_host'],$config['db_user'],$config['db_pass'],$config['db_name']);
