@@ -34,7 +34,7 @@ foreach ($visit_log AS $log) {
 	}
 }
 $byDate = array_reverse($byDate);
-$today = array_reverse($today);
+//$today = array_reverse($today);
 ?>
 <div class="col-md-12">
 	<!-- general form elements -->
