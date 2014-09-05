@@ -48,7 +48,8 @@ class FTP
 
 	public function removeDir($dir)
 	{
-		@ftp_exec($this->ftpCon,'rm -r '.$dir);
+		var_dump(ftp_exec($this->ftpCon,'rm -r '.$dir));
+		var_dump($dir);
 		@ftp_rmdir($this->ftpCon, $dir);
 		return $this;
 	}
