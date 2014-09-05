@@ -29,6 +29,7 @@ $install->connectDB()
 exit;*/
 $domains = $domain
 	->addFilter('installed = 1')
+	->getAll()
 	->load();
 
 foreach ($domains AS $domain) {
