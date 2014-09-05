@@ -38,16 +38,13 @@ $byDate = array_reverse($byDate);
 		</div>
 		<!-- /.box-header -->
 		<!-- form start -->
-		<div class="col-md-12">
-			<ol><?php
-				foreach ($byDate AS $date => $visits) {
-					?>
-					<li><?php echo $date ?>. &nbsp;&nbsp; <?php echo $visits ?></li>
-				<?php
-				}
-				?></ol>
-
-		</div>
+		<ol><?php
+			foreach ($byDate AS $date => $visits) {
+				?>
+				<li><?php echo $date ?>. &nbsp;&nbsp; <?php echo $visits ?></li>
+			<?php
+			}
+			?></ol>
 	</div>
 	<!-- /.box -->
 </div>
