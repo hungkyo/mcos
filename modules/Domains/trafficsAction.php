@@ -41,7 +41,11 @@ $byDate = array_reverse($byDate);
 		<ol><?php
 			foreach ($byDate AS $date => $visits) {
 				?>
-				<li><?php echo $date ?>. &nbsp;&nbsp; <?php echo $visits ?></li>
+				<li>
+					<?php echo $date == date('d-m-Y') ? '<b>' : ''?>
+					<?php echo $date ?>: &nbsp;&nbsp; <?php echo $visits ?>
+					<?php echo $date == date('d-m-Y') ? '</b> (Today)' : ''?>
+				</li>
 			<?php
 			}
 			?></ol>
