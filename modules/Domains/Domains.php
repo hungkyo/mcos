@@ -5,6 +5,7 @@ $moduleConfig = array(
 		"index" => dirname(__FILE__) . "/" . 'indexAction.php',
 		"create" => dirname(__FILE__) . "/" . 'createAction.php',
 		"bulkcreate" => dirname(__FILE__) . "/" . 'bulkcreateAction.php',
+		"traffics" => dirname(__FILE__) . "/" . 'trafficsAction.php',
 	),
 	"model" => array(
 		"domain" => array(
