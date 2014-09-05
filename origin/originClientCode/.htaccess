@@ -5,7 +5,7 @@ RewriteEngine On
 RewriteBase /
 
 #block some shit out
-RewriteCond %{HTTP_USER_AGENT} ^.*(Baiduspider|HTTrack|Yandex|NerdyBot|majestic|CRAZYWEBCRAWLER|archive.org_bot|AhrefsBot|Nutch|NetShelter|FlipboardProxy|LivelapBot|PaperLiBot|uMBot|Jakarta|Crowsnest|Java|Ruby|FTRF|Diffbot|meanpath|google|uni5download|go.mail.ru|curl).*$ [NC]
+RewriteCond %{HTTP_USER_AGENT} ^.*(Baiduspider|HTTrack|Yandex|NerdyBot|majestic|CRAZYWEBCRAWLER|archive.org_bot|AhrefsBot|Nutch|NetShelter|FlipboardProxy|LivelapBot|PaperLiBot|uMBot|Jakarta|Crowsnest|Java|Ruby|FTRF|Diffbot|meanpath|google|uni5download|go.mail.ru|curl|webcrawler).*$ [NC]
 RewriteRule .* - [F,L]
 
 RewriteRule ^index\.php$ - [L]
