@@ -34,7 +34,21 @@ if (count($domains)) {
 					<td><?php echo $domain->getData('installed') > 0 ? 'Installed' : 'Not Installed' ?></td>
 					<td><?php echo $domain->getData('active') > 0 ? 'Activated' : 'Not Activated' ?></td>
 					<td><?php echo $domain->getData('posts') ?></td>
-					<td>&nbsp;</td>
+					<td><?php
+						echo (int) $domain->getData('visits');
+						echo ' => ';
+						$curl = curl_init("http://{$domain->getData('name')}/visit_log");
+						curl_setopt($curl, CURLOPT_HEADER, false);
+						curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+						$visit_log = trim(curl_exec($curl));
+						curl_close($curl);
+						$visit_log = explode("\r\n",$visit_log);
+						$newVisitsCount = count($visit_log);
+						if($newVisitsCount <> (int) $domain->getData('visits')){
+							$domain->setData('visits',$newVisitsCount)->save();
+						}
+						echo $newVisitsCount;
+						?></td>
 					<td>
 						<a href="?module=<?php echo $_GET['module'] ?>&action=create&id=<?php echo $domain->getData('entity_id') ?>">Edit</a>
 					</td>
