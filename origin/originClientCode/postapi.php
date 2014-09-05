@@ -43,4 +43,9 @@ if ($_POST['pingnow'] == 1) {
 		if ('' != $service)
 			weblog_ping($service);
 	}
+	$ch = curl_init('http://www.bing.com/ping?sitemap='.urlencode(get_bloginfo('rss2_url')));
+	curl_setopt($ch, CURLOPT_HEADER, TRUE);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, false);
+	$head = curl_exec($ch);
+	curl_close($ch);
 }
