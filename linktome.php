@@ -14,33 +14,43 @@ include_once "config.php";
 include_once "functions.php";
 
 $mysql = getModel('DB');
-$mysql->connect($config['db_host'],$config['db_user'],$config['db_pass'],$config['db_name']);
+$mysql->connect($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
 
 $you = $_GET['you'];
-$domain = getModel('domain')->load($you,'name');
+$domain = getModel('domain')->load($you, 'name');
 $youId = $domain->getId();
+$needToLoad = 5;
 $domains = getModel('domain')
-	->addFilter('entity_id > '.$youId)
+	->addFilter('entity_id > ' . $youId)
 	->addSelect('name')
 	->addFilter('active = 1')
 	->addFilter('installed = 1')
 	->setCurPage(1)
-	->setPageSize(1)
-	->addOrder('entity_id','ASC')
+	->setPageSize($needToLoad)
+	->addOrder('entity_id', 'ASC')
 	->load();
-if(count($domains) < 1){
-	$domains = getModel('domain')
+if (count($domains) < $needToLoad) {
+	$domains2 = getModel('domain')
 		->addSelect('name')
 		->addFilter('active = 1')
 		->addFilter('installed = 1')
 		->setCurPage(1)
-		->setPageSize(1)
-		->addOrder('entity_id','ASC')
+		->setPageSize($needToLoad - count($domains))
+		->addOrder('entity_id', 'ASC')
 		->load();
+	$domains = array_merge($domains,$domains2);
 }
-if(count($domains)){
-	$domain = $domains[0];
-?>
-<a href="http://<?php echo $domain->getData('name')?>/" rel="dofollow"><?php echo $domain->getData('name')?></a>
+if (count($domains)) {
+	?>
+	<ul>
+		<?php
+		foreach ($domains AS $domain) {
+			?>
+			<li><a href="http://<?php echo $domain->getData('name') ?>/"
+			       rel="dofollow"><?php echo $domain->getData('name') ?></a></li>
+		<?php
+		}
+		?>
+	</ul>
 <?php
 }
