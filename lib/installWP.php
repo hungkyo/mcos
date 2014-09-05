@@ -165,7 +165,7 @@ class installWP
 		return $this;
 	}
 	public function rmSourceCode(){
-		$this->ftp->rmDir("/var/www/mcos-wp/" . $this->domain);
+		$this->ftp->removeDir("/var/www/mcos-wp/" . $this->domain);
 		return $this;
 	}
 	public function rmZone(){
