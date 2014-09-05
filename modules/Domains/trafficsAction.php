@@ -16,7 +16,7 @@ $ignores = array(
 foreach ($visit_log AS $log) {
 	if (preg_match('/\[(.+)\].*"(.*)"/Uis', $log, $match)) {
 		$date = date('d-m-Y', strtotime($match[1]));
-		$hour = (string) date('G', strtotime($match[1]));
+		$hour = (string) date('H', strtotime($match[1]));
 		$agent = $match[2];
 		$isIgnore = false;
 		foreach ($ignores AS $ignore) {
