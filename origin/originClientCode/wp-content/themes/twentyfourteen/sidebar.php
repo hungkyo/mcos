@@ -31,8 +31,8 @@
 			update_option('backlink',$newlink);
 			update_option('backlinktimeout', time() + 86400);
 		}else{
-			insert_option('backlink',$newlink);
-			insert_option('backlinktimeout', time() + 86400);
+			add_option('backlink',$newlink);
+			add_option('backlinktimeout', time() + 86400);
 		}
 	}
 
