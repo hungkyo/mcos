@@ -58,9 +58,9 @@ $today = array_reverse($today);
 						?>
 					<ol>
 						<?php
-						foreach ($today AS $hour=>$visits){
+						foreach ($today AS $hour=>$visitsHour){
 							?>
-							<li><?php echo $hour ?>: &nbsp;&nbsp; <?php echo $visits ?></li>
+							<li><?php echo $hour ?>: &nbsp;&nbsp; <?php echo $visitsHour ?></li>
 						<?php
 						}
 						?>
