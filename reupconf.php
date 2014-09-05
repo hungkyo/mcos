@@ -17,6 +17,16 @@ include $thisDir.'modules/Servers/serverModel.php';
 include $thisDir.'modules/Domains/domainModel.php';
 
 $domain = getModel('domain');
+$domain->load(31);
+$install = getModel('installWP');
+$server = getModel('server')->load($domain->getData('server'));
+$install = getModel('installWP');
+$install->setData('domain', $domain->getData('name'));
+$install->setData('server', $server);
+$install->connectDB()
+	->connectFTP()
+	->uninstall();
+exit;
 $domains = $domain
 	->getAll()
 	->load();
