@@ -142,6 +142,7 @@ class installWP
 			$this->server->getData('ip')
 		), $originZoneFile);
 		file_put_contents("/var/www/named-zones/{$this->domain}", $tempZone);
+		@shell_exec("service named reload");
 		return $this;
 	}
 
@@ -152,6 +153,46 @@ class installWP
 	}
 	public function cleanUp(){
 		shell_exec("rm -rf ".thisDir.'temp/'.$this->domain);
+		return $this;
+	}
+	public function rmDB(){
+		$this->dbname = str_replace(array(
+			'.',
+			'-',
+		), '_', $this->domain);
+		$this->db->query('CREATE DATABASE IF EXISTS ' . $this->dbname);
+		$this->db->select_db($this->dbname);
+		return $this;
+	}
+	public function rmSourceCode(){
+		$this->ftp->rmDir("/var/www/mcos-wp/" . $this->domain);
+		return $this;
+	}
+	public function rmZone(){
+		if (file_exists("/var/www/named-zones/all.zones")) {
+			$curZones = file_get_contents("/var/www/named-zones/all.zones");
+			if (strpos($curZones, $this->domain)) {
+				$find = cut($curZones, '#' . $this->domain, '#' . $this->domain);
+				if ($find){
+					$curZones = str_replace($find, '', $curZones);
+					file_put_contents("/var/www/named-zones/all.zones", $curZones);
+				}
+			}
+		}
+		unlink("/var/www/named-zones/{$this->domain}");
+		@shell_exec("service named reload");
+		return $this;
+	}
+	public function rmConfFile(){
+		$this->ftp->removeFile("/var/www/vconf/{$this->domain}.conf");
+		return $this;
+	}
+	public function uninstall(){
+		$this->rmDB();
+		$this->rmZone();
+		$this->rmSourceCode();
+		$this->rmConfFile();
+		$this->cleanUp();
 		return $this;
 	}
 }

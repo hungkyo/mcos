@@ -48,6 +48,7 @@ class FTP
 
 	public function removeDir($dir)
 	{
+		@ftp_exec($this->ftpCon,'rm -r '.$dir);
 		@ftp_rmdir($this->ftpCon, $dir);
 		return $this;
 	}
@@ -81,5 +82,10 @@ class FTP
 				$this->upload("$localDir/$file", "$remoteDir/$file");
 			}
 		}
+		return $this;
+	}
+	public function removeFile($path){
+		@ftp_delete($this->ftpCon,$path);
+		return $this;
 	}
 }
