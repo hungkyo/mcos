@@ -16,7 +16,7 @@ $ignores = array(
 foreach ($visit_log AS $log) {
 	if (preg_match('/\[(.+)\].*"(.*)"/Uis', $log, $match)) {
 		$date = date('d-m-Y', strtotime($match[1]));
-		$hour = date('G',strtotime($match[1]));
+		$hour = date('G', strtotime($match[1]));
 		$agent = $match[2];
 		$isIgnore = false;
 		foreach ($ignores AS $ignore) {
@@ -27,14 +27,15 @@ foreach ($visit_log AS $log) {
 		}
 		if (!$isIgnore) {
 			$byDate[$date]++;
-			if($date == date('d-m-Y')){
+			if ($date == date('d-m-Y')) {
 				$today[$hour]++;
 			}
 		}
 	}
 }
 $byDate = array_reverse($byDate);
-//$today = array_reverse($today);
+var_dump($today);
+$today = array_reverse($today);var_dump($today);
 ?>
 <div class="col-md-12">
 	<!-- general form elements -->
@@ -42,7 +43,7 @@ $byDate = array_reverse($byDate);
 		<div class="box-header">
 			<h3 class="box-title"><?php echo ucwords($mode) ?> Domain</h3>
 			<br/>
-			<small>System Time: <?php echo date('G:i:s d/m/Y');?></small>
+			<small>System Time: <?php echo date('G:i:s d/m/Y'); ?></small>
 		</div>
 		<!-- /.box-header -->
 		<!-- form start -->
@@ -50,21 +51,21 @@ $byDate = array_reverse($byDate);
 			foreach ($byDate AS $date => $visits) {
 				?>
 				<li>
-					<?php echo $date == date('d-m-Y') ? '<b>' : ''?>
+					<?php echo $date == date('d-m-Y') ? '<b>' : '' ?>
 					<?php echo $date ?>: &nbsp;&nbsp; <?php echo $visits ?>
-					<?php echo $date == date('d-m-Y') ? '</b> (Today)' : ''?>
+					<?php echo $date == date('d-m-Y') ? '</b> (Today)' : '' ?>
 					<?php
-					if($date == date('d-m-Y')){
+					if ($date == date('d-m-Y')) {
 						?>
-					<ol>
-						<?php
-						foreach ($today AS $hour=>$visitsHour){
+						<ol>
+							<?php
+							foreach ($today AS $hourToday => $visitsHour) {
+								?>
+								<li><?php echo $hourToday ?>: &nbsp;&nbsp; <?php echo $visitsHour ?></li>
+							<?php
+							}
 							?>
-							<li><?php echo $hour ?>: &nbsp;&nbsp; <?php echo $visitsHour ?></li>
-						<?php
-						}
-						?>
-					</ol>
+						</ol>
 					<?php
 					}
 					?>
