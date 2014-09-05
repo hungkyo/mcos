@@ -40,6 +40,7 @@ $byDate = array_reverse($byDate);
 	<div class="box box-primary">
 		<div class="box-header">
 			<h3 class="box-title"><?php echo ucwords($mode) ?> Domain</h3>
+			<br/>
 			<small>System Time: <?php echo date('G:i:s d/m/Y');?></small>
 		</div>
 		<!-- /.box-header -->
