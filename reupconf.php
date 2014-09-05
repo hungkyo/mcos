@@ -17,7 +17,7 @@ include $thisDir.'modules/Servers/serverModel.php';
 include $thisDir.'modules/Domains/domainModel.php';
 
 $domain = getModel('domain');
-$domain->load(31);
+/*$domain->load(31);
 $install = getModel('installWP');
 $server = getModel('server')->load($domain->getData('server'));
 $install = getModel('installWP');
@@ -26,9 +26,9 @@ $install->setData('server', $server);
 $install->connectDB()
 	->connectFTP()
 	->uninstall();
-exit;
+exit;*/
 $domains = $domain
-	->getAll()
+	->addFilter('installed = 1')
 	->load();
 
 foreach ($domains AS $domain) {
