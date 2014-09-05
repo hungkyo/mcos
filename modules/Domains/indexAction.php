@@ -48,7 +48,9 @@ if (count($domains)) {
 							$domain->setData('visits',$newVisitsCount)->save();
 							echo ' => '.$newVisitsCount;
 						}
-						?></td>
+						?>&nbsp;&nbsp;&nbsp;
+					<a href="?module=<?php echo $_GET['module'] ?>&action=traffics&domain=<?php echo $domain->getData('name')?>">Details</a>
+					</td>
 					<td>
 						<a href="?module=<?php echo $_GET['module'] ?>&action=create&id=<?php echo $domain->getData('entity_id') ?>">Edit</a>
 					</td>
