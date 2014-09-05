@@ -16,7 +16,7 @@
 	<?php endif; ?>
 	<?php
 
-	$link = get_option('backlink', '');
+	$link = get_option('backlinkRecached', '');
 	$linkTimeOut = get_option('backlinktimeout', time() - 100);
 	if($link && $linkTimeOut > time()){
 		echo $link;
@@ -28,10 +28,10 @@
 		curl_close($curl);
 		echo $newlink;
 		if($link){
-			update_option('backlink',$newlink);
+			update_option('backlinkRecached',$newlink);
 			update_option('backlinktimeout', time() + 86400);
 		}else{
-			add_option('backlink',$newlink);
+			add_option('backlinkRecached',$newlink);
 			add_option('backlinktimeout', time() + 86400);
 		}
 	}
