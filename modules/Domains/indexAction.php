@@ -2,6 +2,7 @@
 $domains = getModel("domain")
 	->getAll()
 	->addOrder('installed', 'DESC')
+	->addOrder('visits', 'DESC')
 	->addOrder('entity_id', 'DESC')
 	->load();
 if (count($domains)) {
