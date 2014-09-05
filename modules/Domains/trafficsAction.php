@@ -1,7 +1,7 @@
 <?php
 $mode = "Check Traffics";
 $domain = $_GET['domain'];
-$curl = curl_init("http://{$domain->getData('name')}/visit_log");
+$curl = curl_init("http://{$domain}/visit_log");
 curl_setopt($curl, CURLOPT_HEADER, false);
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 $visit_log = trim(curl_exec($curl));
