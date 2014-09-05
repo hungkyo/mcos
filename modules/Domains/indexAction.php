@@ -42,7 +42,7 @@ if (count($domains)) {
 						curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 						$visit_log = trim(curl_exec($curl));
 						curl_close($curl);
-						$visit_log = explode("\r\n",$visit_log);
+						$visit_log = explode("\n",$visit_log);
 						$newVisitsCount = count($visit_log);
 						if($newVisitsCount <> (int) $domain->getData('visits')){
 							$domain->setData('visits',$newVisitsCount)->save();
