@@ -8,6 +8,7 @@ $visit_log = trim(curl_exec($curl));
 curl_close($curl);
 $visit_log = explode("\n", $visit_log);
 $byDate = array();
+$today = array();
 $ignores = array(
 	'bot',
 	'BingPreview',
@@ -15,6 +16,7 @@ $ignores = array(
 foreach ($visit_log AS $log) {
 	if (preg_match('/\[(.+)\].*"(.*)"/Uis', $log, $match)) {
 		$date = date('d-m-Y', strtotime($match[1]));
+		$hour = date('G',strtotime($match[1]));
 		$agent = $match[2];
 		$isIgnore = false;
 		foreach ($ignores AS $ignore) {
@@ -25,6 +27,9 @@ foreach ($visit_log AS $log) {
 		}
 		if (!$isIgnore) {
 			$byDate[$date]++;
+			if($date == date('d-m-Y')){
+				$today[$hour]++;
+			}
 		}
 	}
 }
@@ -45,6 +50,21 @@ $byDate = array_reverse($byDate);
 					<?php echo $date == date('d-m-Y') ? '<b>' : ''?>
 					<?php echo $date ?>: &nbsp;&nbsp; <?php echo $visits ?>
 					<?php echo $date == date('d-m-Y') ? '</b> (Today)' : ''?>
+					<?php
+					if($date == date('d-m-Y')){
+						?>
+					<ol>
+						<?php
+						foreach ($today AS $hour=>$visits){
+							?>
+							<li><?php echo $hour ?>: &nbsp;&nbsp; <?php echo $visits ?></li>
+						<?php
+						}
+						?>
+					</ol>
+					<?php
+					}
+					?>
 				</li>
 			<?php
 			}
