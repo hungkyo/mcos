@@ -30,7 +30,7 @@ $domainName = $domain->getData('name');
 $post = getModel('post');
 $postCollection = $post->addFilter(array('posted' => 0))
 	->setCurPage(1)
-	->setPageSize(35)
+	->setPageSize(5)
 	->load();
 foreach ($postCollection AS $post) {
 	$data[] = array(
@@ -54,7 +54,7 @@ $x = get_curl('http://' . $domainName . '/postapi.php', array(
 		'pingnow' => 1,
 	),
 ));
-
+file_put_contents('post_log',date('H:i:s d-m-Y').': '.$domain->getData('name').' -  '.var_export($x,true),FILE_APPEND);
 $curPost = $domain->getData('posts');
 $domain->setData('posts', $curPost + count($postCollection))
 	->save();
