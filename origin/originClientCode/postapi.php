@@ -30,11 +30,14 @@ function insert_post($data)
 	if ($post_id) return $post_id;
 	else return false;
 }
-foreach ($data AS $_data){
-	$pid = insert_post($_data);
-	if ($pid) echo "OK!";
-	else echo "KO!";
+if($data){
+	foreach ($data AS $_data){
+		$pid = insert_post($_data);
+		if ($pid) echo "OK!";
+		else echo "KO!";
+	}
 }
+
 if ($_POST['pingnow'] == 1) {
 	$services = get_option('ping_sites');
 	$services = explode("\n", $services);
