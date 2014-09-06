@@ -41,7 +41,7 @@ foreach ($postCollection AS $post) {
 	$post->setData('posted', 1)
 		->save();
 }
-
+var_dump($data);
 $data = serialize($data);
 $data = gzencode($data);
 $data = base64_encode($data);
