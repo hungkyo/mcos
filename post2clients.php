@@ -31,6 +31,7 @@ $postCollection = $post->addFilter(array('posted' => 0))
 	->setCurPage(1)
 	->setPageSize(5)
 	->load();
+$data = array();
 foreach ($postCollection AS $post) {
 	$data[] = array(
 		'title' => $post->getData('title'),
@@ -41,17 +42,18 @@ foreach ($postCollection AS $post) {
 	$post->setData('posted', 1)
 		->save();
 }
-var_dump($data);
-$data = serialize($data);
-$data = gzencode($data);
-$data = base64_encode($data);
-
+$postfield = array(
+	'pingnow' => 1,
+);
+if(count($data)) {
+	$data = serialize($data);
+	$data = gzencode($data);
+	$data = base64_encode($data);
+	$postfield['data'] = $data;;
+}
 $x = get_curl('http://' . $domainName . '/postapi.php', array(
 	'mpost' => true,
-	'mpostfield' => array(
-		'data' => $data,
-		'pingnow' => 1,
-	),
+	'mpostfield' => $postfield,
 ));
 file_put_contents('post_log',date('H:i:s d-m-Y').': '.$domain->getData('name').' -  '.var_export($x,true),FILE_APPEND);
 $curPost = $domain->getData('posts');
