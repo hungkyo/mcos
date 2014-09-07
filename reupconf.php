@@ -36,7 +36,7 @@ foreach($domains AS $domain){
 
 //exit;
 $domains = $domain
-	->addFilter('installed = 1')
+//	->addFilter('installed = 1')
 	->getAll()
 	->load();
 var_dump($domains);
@@ -56,7 +56,6 @@ foreach ($domains AS $domain) {
 		->uploadClient()
 		->cleanUp();
 //		->uploadConfFile();
-//	$domain->setData('installed', 1)
-//		->save();
+	$domain->setData('installed', 1)->save();
 	echo $domain->getData('name')."\r\n";
 }
