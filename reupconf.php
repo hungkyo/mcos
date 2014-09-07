@@ -17,7 +17,7 @@ include $thisDir.'modules/Servers/serverModel.php';
 include $thisDir.'modules/Domains/domainModel.php';
 
 $domain = getModel('domain');
-$domains = $domain
+/*$domains = $domain
 	->addFilter('installed = 1')
 	->getAll()
 	->load();
@@ -32,9 +32,9 @@ foreach($domains AS $domain){
 		->uninstall();
 	$domain->setData('installed',0)
 		->setData('active',0)->save();
-}
+}*/
 
-exit;
+//exit;
 $domains = $domain
 	->addFilter('installed = 1')
 	->getAll()
