@@ -41,7 +41,7 @@ $domains = $domain
 	->load();
 var_dump($domains);
 foreach ($domains AS $domain) {
-	$server = getModel('server')->load($domain->getData('server'));
+	/*$server = getModel('server')->load($domain->getData('server'));
 	$install = getModel('installWP');
 	$install->setData('domain', $domain->getData('name'));
 	$install->setData('server', $server);
@@ -55,7 +55,7 @@ foreach ($domains AS $domain) {
 //		->mkConfFile()
 		->uploadClient()
 		->cleanUp();
-//		->uploadConfFile();
-	$domain->setData('installed', 1)->save();
+//		->uploadConfFile();*/
+	$domain->setData('installed', 1)->setData('active',1)->save();
 	echo $domain->getData('name')."\r\n";
 }
