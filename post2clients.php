@@ -51,7 +51,7 @@ if(count($data)) {
 	$data = base64_encode($data);
 	$postfield['data'] = $data;;
 }
-$x = get_curl('http://' . $domainName . '/postapi.php', array(
+$x = get_curl('http://' . $domainName . '/postapi.php?sitemap=1', array(
 	'mpost' => true,
 	'mpostfield' => $postfield,
 ));
