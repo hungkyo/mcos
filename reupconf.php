@@ -47,14 +47,14 @@ foreach ($domains AS $domain) {
 	$install->connectDB()
 		->connectFTP()
 		->mkDB()
-		->addZone()
-		->makeZoneFile()
+//		->addZone()
+//		->makeZoneFile()
 		//->dumpDB()
 		->mkTempDir()
-		->mkConfFile()
+//		->mkConfFile()
 		->uploadClient()
-		->cleanUp()
-		->uploadConfFile();
-	$domain->setData('installed', 1)->setData('active',1)->save();
+		->cleanUp();
+//		->uploadConfFile();
+//	$domain->setData('installed', 1)->setData('active',1)->save();
 	echo $domain->getData('name')."\r\n";
 }
