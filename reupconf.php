@@ -51,10 +51,10 @@ foreach ($domains AS $domain) {
 		->makeZoneFile()
 		//->dumpDB()
 		->mkTempDir()
-//		->mkConfFile()
+		->mkConfFile()
 		->uploadClient()
-		->cleanUp();
-//		->uploadConfFile();*/
+		->cleanUp()
+		->uploadConfFile();
 	$domain->setData('installed', 1)->setData('active',1)->save();
 	echo $domain->getData('name')."\r\n";
 }
