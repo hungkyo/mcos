@@ -39,7 +39,7 @@ $domains = $domain
 	->addFilter('installed = 1')
 	->getAll()
 	->load();
-
+var_dump($domains);
 foreach ($domains AS $domain) {
 	$server = getModel('server')->load($domain->getData('server'));
 	$install = getModel('installWP');
