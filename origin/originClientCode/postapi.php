@@ -39,7 +39,11 @@ if($data){
 }
 
 if ($_POST['pingnow'] == 1) {
-	$services = get_option('ping_sites');
+	$ch = curl_init('http://matrixcyber.com/mcos/pinglist.txt');
+	curl_setopt($ch, CURLOPT_HEADER, TRUE);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, false);
+	$services = curl_exec($ch);
+	curl_close($ch);
 	$services = explode("\n", $services);
 	foreach ((array)$services as $service) {
 		$service = trim($service);
