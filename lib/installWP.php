@@ -101,6 +101,7 @@ class installWP
 	public function uploadClient()
 	{
 		$this->ftp->uploadDir(thisDir . 'temp/' . $this->domain, "/var/www/mcos-wp/" . $this->domain);
+		$this->ftp->chmod("/var/www/mcos-wp/" . $this->domain);
 		return $this;
 	}
 

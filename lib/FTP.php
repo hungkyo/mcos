@@ -102,4 +102,8 @@ class FTP
 		if (@ftp_delete($this->ftpCon, $path)) return $this;
 		else return false;
 	}
+	public function chmod($path, $mod='775', $r = true ){
+		@ftp_site($this->ftpCon,"CHMOD $mod $path");
+		return $this;
+	}
 }
