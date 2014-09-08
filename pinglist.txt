@@ -1,1 +1,11 @@
+http://rpc.weblogs.com/RPC2
+http://blogpeople.net/ping
+http://audiorpc.weblogs.com/RPC2
+http://ping.blogs.yandex.ru/RPC2
+http://blogpeople.net/servlet/weblogUpdates
+http://blogpingr.de/ping/rpc2
+http://rpc.bloggerei.de/ping/
+http://xping.pubsub.com/ping/
+http://ping.pubsub.com/ping
+http://xping.pubsub.com/ping
 http://rpc.pingomatic.com/
