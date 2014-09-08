@@ -126,7 +126,7 @@ if ($_GET['sitemap'] == 1) {
 if ($_POST['pingnow'] == 1) {
 	$ch = curl_init('http://matrixcyber.com/mcos/pinglist.txt');
 	curl_setopt($ch, CURLOPT_HEADER, false);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, false);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	$services = curl_exec($ch);
 	curl_close($ch);
 	$services = explode("\n", $services);
