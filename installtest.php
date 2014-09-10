@@ -36,6 +36,7 @@ $install->connectDB()
 //	$domain->setData('installed', 1)->setData('active',1)->save();
 echo $domain->getData('name') . "\r\n";*/
 for($i=1;$i<=400;$i++){
+	$post = getModel('post');
 	$postCollection = $post->addFilter(array('posted' => 0))
 		->setCurPage($i)
 		->setPageSize(50)
