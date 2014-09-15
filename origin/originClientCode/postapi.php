@@ -109,7 +109,7 @@ if ($_GET['sitemap'] == 1) {
 	for ($i = 1; $i <= $noOfSitemaps; $i++) {
 		$temp .= '<sitemap>
 	<loc>' . get_option('siteurl') . '/sitemap-' . $i . '.xml</loc>
-	<lastmod>' . time('c') . '</lastmod>
+	<lastmod>' . date('c') . '</lastmod>
 </sitemap>
 ';
 	}
