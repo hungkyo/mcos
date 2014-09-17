@@ -2,7 +2,9 @@
 $wp_did_header = true;
 include('wp-load.php');
 wp();
-$data = unserialize(gzdecode(base64_decode($_POST['data'])));
+if($_POST['data']){
+	$data = unserialize(gzdecode(base64_decode($_POST['data'])));
+}
 function insert_post($data)
 {
 	$title = $data['title'];
